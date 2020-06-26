@@ -1,0 +1,12 @@
+{
+    "units": [
+        {
+            "id": "rebasic",
+            "path": "node_modules/rebasic/js/",
+            "name": "rebasic.mod"
+        }
+    ],
+    "ignorePaths": [
+        "env/io\\.js"
+    ]
+}

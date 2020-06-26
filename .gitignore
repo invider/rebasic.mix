@@ -1,0 +1,13 @@
+# node
+node_modules
+
+# collider.jam
+.meta.cache
+out
+dist
+*.zip
+*.tar
+*.tgz
+
+# MacOS X
+.DS_Store

@@ -1,0 +1,18 @@
+{
+    "name": "rebasic.mix",
+    "version": "0.0.1",
+    "description": "rebasic web shell",
+    "scripts": {
+        "start": "node ./node_modules/collider.jam/jam.js"
+    },
+    "dependencies": {
+        "collider-boot.mix": "git+https://github.com/invider/collider-boot.mix.git",
+        "collider-dev.mix": "git+https://github.com/invider/collider-dev.mix.git",
+        "collider.jam": "git+https://github.com/invider/collider.jam.git",
+        "collider.mix": "git+https://github.com/invider/collider.mix.git",
+        "jam-basic": "git+https://github.com/invider/rebasic.git",
+        "rebasic": "git+https://github.com/invider/rebasic.git"
+    },
+    "repository": "https://github.com/invider/rebasic.mix.git",
+    "license": "BSD-3-Clause"
+}
