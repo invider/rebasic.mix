@@ -1,14 +1,9 @@
 function init() {
     this.buf = []
-    this.queue = []
-}
-
-function acceptInput(then) {
-    this.accept = true
-    this.queue.push(then)
 }
 
 function inputKey(c) {
+    if (c === "'") c = '"'
     this.buf.push(c)
     lab.textmode.outc(c)
 }
@@ -21,15 +16,7 @@ function backspace() {
 }
 
 function command(cmd) {
-    log('[' + cmd + ']')
-
-    // check for an input callback
-    if (this.queue.length > 0) {
-        const then = this.queue.shift()
-        then(cmd)
-    } else {
-        lab.vm.inputHandler(cmd)
-    }
+    lab.vm.inputHandler(cmd)
 }
 
 function enter() {
@@ -37,3 +24,4 @@ function enter() {
     this.command(this.buf.join(''))
     this.buf = []
 }
+

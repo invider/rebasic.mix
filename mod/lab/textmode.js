@@ -99,9 +99,20 @@ function putc(c, x, y) {
 }
 
 function outc(c) {
-    this.putc(c, this.cx, this.cy)
-    this.shiftCursor()
+    if (c === '\n') {
+        this.returnCursor()
+    } else {
+        this.putc(c, this.cx, this.cy)
+        this.shiftCursor()
+    }
     this.timer = 0
+}
+
+function printout(line) {
+    line = '' + line
+    for (let i = 0, ln = line.length; i < ln; i++) {
+        this.outc(line.charAt(i))
+    }
 }
 
 function println(line) {
