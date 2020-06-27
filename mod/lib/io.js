@@ -1,0 +1,5 @@
+
+const io = {
+    print: function() {
+    }
+}

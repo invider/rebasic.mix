@@ -1,3 +1,5 @@
+const Z = 1
+
 function draw() {
     background(env.tune.border)
 
@@ -17,11 +19,18 @@ function draw() {
     const scale = hscale < vscale? hscale : vscale
 
     // calculate actual screen dimention and position
-    const sw = vram.width * scale
-    const sh = vram.height * scale
+    const sw = vram.width * scale * env.tune.scale
+    const sh = vram.height * scale * env.tune.scale
     const x = (env.width - sw)/2
     const y = (env.height - sh)/2
 
     blocky()
+    //smooth()
     image(vram, x, y, sw, sh)
+
+    this.x = x
+    this.y = y
+    this.w = sw
+    this.h = sh
+    this.scale = scale
 }
