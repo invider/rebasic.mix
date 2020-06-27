@@ -1,11 +1,11 @@
 function keyDown(e) {
     if (e.code === 'Enter') {
-        lab.textmode.returnCursor()
+        lab.ioCtrl.enter()
 
     } else if (e.code === 'Backspace') {
-        lab.textmode.backspace()
+        lab.ioCtrl.backspace()
 
     } else if (e.key.length === 1) {
-        lab.textmode.outc(e.key)
+        lab.ioCtrl.inputKey(e.key)
     } 
 }

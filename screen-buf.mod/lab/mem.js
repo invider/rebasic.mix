@@ -29,25 +29,23 @@ function paint() {
     fill(env.tune.background)
     rect(0, 0, w, h)
 
-
-    rect(RND(w), RND(h), 1, 1)
-    rect(RND(w), RND(h), 1, 1)
-
+    /*
     lineWidth(2)
     stroke('#202020')
-
     rect(20, 20, w-40, h-40)
     line(0, 0, w, h)
     line(w, 0, 0, h)
+    */
 
     //font('8px pixel-operator-mono8')
-    font('10px coolville')
+    font('8px typewriter')
     alignLeft()
     baseTop()
-    fill('#000000')
-    text('Welcome to Low Res Mode!', 1, 1)
-    fill('#aaff90')
-    text('Welcome to Low Res Mode!', 0, 0)
+
+    const txt = 'Low-Res Text Drawing!'
+    //fill('#000000')
+    //text(txt, 1, 1) fill('#2010a0')
+    text(txt, 0, 0)
 
     restore()
 }

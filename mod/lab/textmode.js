@@ -1,6 +1,9 @@
 const Z = 2
 const SPACE = ' '
-const CUR = '*'
+
+//const CUR = '*'
+//const CUR = '_'
+//const CUR = '█'
 
 function init() {
     this.timer = 0
@@ -28,9 +31,10 @@ function adjust() {
     this.fw = 8
     this.fh = 12
     */
-    this.font = 'px pixel-operator-mono'
-    this.fontSize = 8
-    this.fw = 4
+    this.font = 'px typewriter'
+    this.fontSize = 6
+    this.curSize = 8
+    this.fw = 5
     this.fh = 10
 
 
@@ -90,13 +94,22 @@ function shiftCursor() {
 function putc(c, x, y) {
     if (!c || c.length !== 1) return
     if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return
-    this.cell[y * this.tw + x] = c
-    //this.cell[y * this.tw + x] = c.toUpperCase()
+    //this.cell[y * this.tw + x] = c
+    this.cell[y * this.tw + x] = c.toUpperCase()
 }
 
 function outc(c) {
     this.putc(c, this.cx, this.cy)
     this.shiftCursor()
+    this.timer = 0
+}
+
+function println(line) {
+    line = '' + line
+    for (let i = 0, ln = line.length; i < ln; i++) {
+        this.outc(line.charAt(i))
+    }
+    this.returnCursor()
 }
 
 function backspace() {
@@ -126,7 +139,7 @@ function draw() {
 
     for (let y = 0, l1 = th; y < l1; y++) {
         for (let x = 0, l2 = tw; x < l2; x++) {
-            fill('#ffff00')
+            fill(env.tune.face)
             const c = cell[y*tw + x] || '?'
             text(c, x*fw*scale, y*fh*scale)
         }
@@ -135,7 +148,10 @@ function draw() {
     if (this.timer % 1 < .5) {
         if (this.cx >= 0 && this.cx < tw
                 && this.cy >= 0 && this.cy < th) {
-            text(CUR, this.cx*fw*scale, this.cy*fh*scale)
+            fill(env.tune.face)
+            rect(this.cx*fw*scale, this.cy*fh*scale,
+                fw*scale, this.curSize*scale)
+            //text(CUR, this.cx*fw*scale, this.cy*fh*scale)
         }
     }
 
