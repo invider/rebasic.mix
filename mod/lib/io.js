@@ -27,7 +27,7 @@ const io = {
                 //process.stdout.write('' + v + ' ')
             }
         }
-        this.interrupted = true
+        this.interrupt(true)
     },
 
     cls: function() {
