@@ -22,21 +22,33 @@ function adjust() {
     // cool
     this.font = 'px coolville'
     this.fontSize = 10
+    this.curSize = 8
+    this.curShift = 0
     this.fw = 5
     this.fh = 10
 
     // operator
     this.font = 'px pixel-operator-mono8'
     this.fontSize = 8
+    this.curSize = 8
+    this.curShift = 0
     this.fw = 8
     this.fh = 12
-    */
+
+    // typewriter
     this.font = 'px typewriter'
     this.fontSize = 6
     this.curSize = 8
+    this.curShift = 0
     this.fw = 5
     this.fh = 10
-
+    */
+    this.font = 'px basis33'
+    this.fontSize = 8
+    this.curSize = 6
+    this.curShift = 1
+    this.fw = 4
+    this.fh = 8
 
     this.tw = floor(W / this.fw) - 1
     this.th = floor(H / this.fh)
@@ -109,6 +121,7 @@ function outc(c) {
 }
 
 function printout(line) {
+    line = line || ''
     line = '' + line
     for (let i = 0, ln = line.length; i < ln; i++) {
         this.outc(line.charAt(i))
@@ -116,10 +129,7 @@ function printout(line) {
 }
 
 function println(line) {
-    line = '' + line
-    for (let i = 0, ln = line.length; i < ln; i++) {
-        this.outc(line.charAt(i))
-    }
+    this.printout(line)
     this.returnCursor()
 }
 
@@ -160,8 +170,9 @@ function draw() {
         if (this.cx >= 0 && this.cx < tw
                 && this.cy >= 0 && this.cy < th) {
             fill(env.tune.face)
-            rect(this.cx*fw*scale, this.cy*fh*scale,
-                fw*scale, this.curSize*scale)
+            rect(this.cx*fw*scale,
+                    (this.cy*fh + this.curShift)*scale,
+                    fw*scale, this.curSize*scale)
             //text(CUR, this.cx*fw*scale, this.cy*fh*scale)
         }
     }
