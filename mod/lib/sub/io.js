@@ -2,16 +2,26 @@ const io = {
 
     open: function() {},
     
+    /*
     prn: function(line) {
         lab.textmode.printout(line)
     },
+    */
 
     print: function(line) {
+        let br = true
         for (let i = 0; i < arguments.length; i++) {
-            if (i > 0) lab.textmode.outc(' ')
-            lab.textmode.printout(arguments[i])
+            let val = arguments[i]
+            if (val === undefined) val = ''
+
+            if (typeof val === 'object' && val.hint) {
+                if (val.nobr) br = false
+            } else {
+                if (i > 0) lab.textmode.outc(' ')
+                lab.textmode.printout(val)
+            }
         }
-        lab.textmode.outc('\n')
+        if (br) lab.textmode.outc('\n')
     },
 
     input: function() {
