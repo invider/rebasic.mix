@@ -7,7 +7,7 @@
         }
     ],
     "ignorePaths": [
-        "env/io\\.js"
+        "env/io\\.js",
         "env/sys\\.js"
     ]
 }

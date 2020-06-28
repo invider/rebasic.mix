@@ -6,8 +6,11 @@ function setupVM() {
     const core = mod.rebasic.lib.core
     for (let n in core) vm.defineCmd(n, core[n])
 
-    const io = lib.io
-    for (let n in io) vm.defineCmd(n, lib.io[n])
+    const io = lib.sub.io
+    for (let n in io) vm.defineCmd(n, io[n])
+
+    const sys = lib.sub.sys
+    for (let n in sys) vm.defineCmd(n, sys[n])
 
     const math = mod.rebasic.lib.math
     for (let n in math.fn) vm.defineFun(n, math.fn[n])
