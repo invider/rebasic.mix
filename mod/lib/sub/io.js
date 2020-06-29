@@ -9,19 +9,21 @@ const io = {
     */
 
     print: function(line) {
-        let br = true
+        let comma = true
         for (let i = 0; i < arguments.length; i++) {
             let val = arguments[i]
             if (val === undefined) val = ''
 
-            if (typeof val === 'object' && val.hint) {
-                if (val.nobr) br = false
+            if (typeof val === 'object' && val.semi) {
+                comma = false
+
             } else {
-                if (i > 0) lab.textmode.outc(' ')
+                if (i > 0 && comma) lab.textmode.outc(' ')
                 lab.textmode.printout(val)
+                comma = true
             }
         }
-        if (br) lab.textmode.outc('\n')
+        if (comma) lab.textmode.outc('\n')
     },
 
     input: function() {
