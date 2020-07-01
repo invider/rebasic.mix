@@ -20,7 +20,15 @@ function drawNoise() {
     }
 }
 
+function clean() {
+    const w = env.width
+    const h = env.height
+    fill(env.tune.background)
+    rect(0, 0, w, h)
+}
+
 function paint() {
+    /*
     const w = env.width
     const h = env.height
     //this.generateNoise(w, h)
@@ -29,13 +37,11 @@ function paint() {
     fill(env.tune.background)
     rect(0, 0, w, h)
 
-    /*
     lineWidth(2)
     stroke('#202020')
     rect(20, 20, w-40, h-40)
     line(0, 0, w, h)
     line(w, 0, 0, h)
-    */
 
     //font('8px pixel-operator-mono8')
     font('8px typewriter')
@@ -48,6 +54,7 @@ function paint() {
     text(txt, 0, 0)
 
     restore()
+    */
 }
 
 let dirty = true

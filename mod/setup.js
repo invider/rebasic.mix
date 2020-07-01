@@ -22,6 +22,10 @@ function setupVM() {
     const str = mod.rebasic.lib.str
     for (let n in str) vm.defineFun(n, str[n])
 
+    // graphics
+    const screen = mod['screen-buf'].lib.screen
+    for (let n in screen) vm.defineCmd(n, screen[n])
+
     // specific hooks to handle stdin/out
     vm.command.open() // open IO with io-specific procedure
 
@@ -33,10 +37,12 @@ function repl() {
     lab.attach(vm, 'vm')
     vm.repl()
 }
+
 function setup() {
     const buf = mod['screen-buf']
     lab.render.vram = buf.ctx.canvas
     buf.env.link(env.tune)
 
+    mod['screen-buf'].lab.mem.clean()
     repl()
 }
