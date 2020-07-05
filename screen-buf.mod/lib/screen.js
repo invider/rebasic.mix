@@ -18,26 +18,38 @@ const palette = [
     '#333c57',
 ]
 
+function mapColor(ci) {
+    let c = color
+    if (isNumber(ci)) {
+        c = palette[ci | 0] || color
+        color = c
+    } else if (isString(ci) && ci.startsWith('#')) {
+        c = ci
+        color = c
+    }
+    return c
+}
+
 let color = '#000000'
 
 const screen = {
 
+    background: function(ci) {
+        let c = mapColor(ci)
+        ctx.fillStyle = c
+        ctx.fillRect(0, 0, rx(.5), ry(.5))
+    },
 
     plot: function(x, y, ci) {
-        let c = color
-        if (isNumber(ci)) {
-            c = palette[ci | 0] || color
-        }
+        let c = mapColor(ci)
         ctx.fillStyle = c
         ctx.fillRect(x, y, 1, 1)
     },
 
     box: function(x, y, w, h, ci) {
-        let c = color
-        if (isNumber(ci)) {
-            c = palette[ci | 0] || color
-        }
+        let c = mapColor(ci)
         ctx.fillStyle = c
         ctx.fillRect(x, y, w, h)
     },
+
 }
