@@ -15,8 +15,8 @@ function init() {
 }
 
 function adjust() {
-    const W = 200
-    const H = 160
+    const W = env.tune.width
+    const H = env.tune.height
 
     /*
     // cool
@@ -35,6 +35,14 @@ function adjust() {
     this.fw = 8
     this.fh = 12
 
+    // basis33
+    this.font = 'px basis33'
+    this.fontSize = 8
+    this.curSize = 6
+    this.curShift = 1
+    this.fw = 4
+    this.fh = 8
+    */
     // typewriter
     this.font = 'px typewriter'
     this.fontSize = 6
@@ -42,16 +50,11 @@ function adjust() {
     this.curShift = 0
     this.fw = 5
     this.fh = 10
-    */
-    this.font = 'px basis33'
-    this.fontSize = 8
-    this.curSize = 6
-    this.curShift = 1
-    this.fw = 4
-    this.fh = 8
 
     this.tw = floor(W / this.fw) - 1
     this.th = floor(H / this.fh)
+    console.dir(this.th)
+    console.dir(H)
     this.dx = floor(W - this.tw*this.fw)/2
     this.dy = floor(H - this.th*this.fh)/2
 }
