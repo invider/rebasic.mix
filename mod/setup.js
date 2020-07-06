@@ -45,4 +45,8 @@ function setup() {
 
     mod['screen-buf'].lab.mem.clean()
     repl()
+
+    if (window.location.hash) {
+        trap('hash', window.location.hash)
+    }
 }
