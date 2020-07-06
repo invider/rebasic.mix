@@ -20,6 +20,7 @@ module.exports = {
 
     save: function save(name) {
         name = name || 'source.bas'
+        name = name.toLowerCase()
         if (name.indexOf('.') < 0) name += '.bas'
 
         const source = lab.vm.source()
