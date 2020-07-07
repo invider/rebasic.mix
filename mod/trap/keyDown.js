@@ -10,13 +10,20 @@ function keyDown(e) {
                 }
         }
 
-    } else if (e.code === 'Enter') {
-        lab.ioCtrl.enter()
-
-    } else if (e.code === 'Backspace') {
-        lab.ioCtrl.backspace()
-
     } else if (e.key.length === 1) {
         lab.ioCtrl.inputKey(e.key)
-    } 
+    } else {
+        switch (e.code) {
+            case 'Enter':
+                lab.ioCtrl.enter()
+                break
+            case 'Backspace':
+                lab.ioCtrl.backspace()
+                break
+            case 'ArrowUp':
+
+            case 'ArrowDown':
+
+        }
+    }
 }

@@ -4,15 +4,17 @@ function init() {
 
 function inputKey(c) {
     if (c === "'") c = '"'
+
     this.buf.push(c)
-    lab.textmode.outc(c)
+    const nextLine = lab.textmode.outc(c)
+    if (nextLine) this.my --
 }
 
 function backspace() {
     if (this.buf.length > 0) {
         this.buf.splice(-1, 1)
+        lab.textmode.backspace()
     }
-    lab.textmode.backspace()
 }
 
 function command(cmd) {

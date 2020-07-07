@@ -103,8 +103,15 @@ function shiftCursor() {
     this.cx ++
     if (this.cx >= this.tw) {
         this.returnCursor()
+        return true
     }
 }
+
+function setCursor(x, y) {
+    this.cx = x
+    this.cy = y
+}
+
 
 function putc(c, x, y) {
     if (!c || c.length !== 1) return
@@ -118,7 +125,7 @@ function outc(c) {
         this.returnCursor()
     } else {
         this.putc(c, this.cx, this.cy)
-        this.shiftCursor()
+        return this.shiftCursor()
     }
     this.timer = 0
 }
@@ -137,8 +144,12 @@ function println(line) {
 }
 
 function backspace() {
-    if (this.cx === 0) return
-    this.cx --
+    if (this.cx === 0) {
+        this.cy --
+        this.cx = this.tw - 1
+    } else {
+        this.cx --
+    }
     this.putc(SPACE, this.cx, this.cy)
 }
 
