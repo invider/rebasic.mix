@@ -121,13 +121,13 @@ function putc(c, x, y) {
 }
 
 function outc(c) {
+    this.timer = 0
     if (c === '\n') {
         this.returnCursor()
     } else {
         this.putc(c, this.cx, this.cy)
         return this.shiftCursor()
     }
-    this.timer = 0
 }
 
 function printout(line) {
@@ -144,6 +144,7 @@ function println(line) {
 }
 
 function backspace() {
+    this.timer = 0
     if (this.cx === 0) {
         this.cy --
         this.cx = this.tw - 1
