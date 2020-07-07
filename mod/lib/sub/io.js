@@ -2,12 +2,6 @@ const io = {
 
     open: function() {},
     
-    /*
-    prn: function(line) {
-        lab.textmode.printout(line)
-    },
-    */
-
     print: function(line) {
         let comma = true
         for (let i = 0; i < arguments.length; i++) {
@@ -35,7 +29,7 @@ const io = {
                 this.inputTarget = v.id
                 this.assign(v.id, 'waiting for values')
             } else {
-                this.command.prn('' + v + ' ')
+                lab.textmode.printout('' + v + ' ')
                 //process.stdout.write('' + v + ' ')
             }
         }

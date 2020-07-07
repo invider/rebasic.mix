@@ -3,7 +3,8 @@ function keyDown(e) {
         switch(e.code) {
             case 'KeyC':
             case 'Backspace':
-                if (!lab.vm.interrupted) {
+                if (!lab.vm.interrupted
+                        || lab.vm.resumeOnInput) {
                     lab.vm.interrupt(false)
                     lab.vm.command.print('...interrupted')
                 }
