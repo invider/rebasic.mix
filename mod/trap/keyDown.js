@@ -21,9 +21,12 @@ function keyDown(e) {
                 lab.ioCtrl.backspace()
                 break
             case 'ArrowUp':
+                lab.ioCtrl.prev()
+                break
 
             case 'ArrowDown':
-
+                lab.ioCtrl.next()
+                break
         }
     }
 }
