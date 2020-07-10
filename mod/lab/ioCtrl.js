@@ -27,7 +27,7 @@ function backspace() {
     }
 }
 
-function command(cmd) {
+function saveHistory(cmd) {
     let last
     if (this.history.length > 0) {
         last = this.history[this.history.length - 1]
@@ -36,8 +36,12 @@ function command(cmd) {
         this.unexecuted = null
         this.history.push(cmd)
         this.historyPos = this.history.length
-        lab.vm.inputHandler(cmd)
     }
+}
+
+function command(cmd) {
+    this.saveHistory(cmd)
+    lab.vm.inputHandler(cmd)
 }
 
 function enter() {
