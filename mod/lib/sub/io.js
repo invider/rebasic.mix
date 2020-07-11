@@ -33,7 +33,7 @@ const io = {
                 //process.stdout.write('' + v + ' ')
             }
         }
-        this.interrupt(true)
+        this.waitForInput()
     },
 
     cls: function() {
