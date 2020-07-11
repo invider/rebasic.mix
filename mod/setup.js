@@ -17,7 +17,7 @@ function setupVM() {
 
     const math = mod.rebasic.lib.math
     for (let n in math.fn) vm.defineFun(n, math.fn[n])
-    for (let n in math.scope) vm.assign(n, math.scope[n])
+    for (let n in math.scope) vm.defineConst(n, math.scope[n])
 
     const str = mod.rebasic.lib.str
     for (let n in str) vm.defineFun(n, str[n])
