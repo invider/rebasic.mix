@@ -1,22 +1,26 @@
+> proper line mapping on load
+> ! commands to clear the screen - like run! and list!
 > default palette
 > color name mapping
 > tmode screenshot
 > gmode screenshot
-> box
 > rect
-> line
 > border
-> background
-> up/down to bring previous commands
 > edit # line
-> sleep
 > cont after stop
-V save in console mode
 
 > sprite engine 
-> paired tile loading support (test.bas + test.png)
+> paired tile loading support (test.bas + test.png), maybe #include comments
 > paired sound sprite loading
 > sprite hex data
 > game loop engine (setup, level, handle, evo, draw, traps, actors)
 > screen buffer support
 > native js functions
+
+V sleep
+V box
+V line
+V background
+V face
+V save in console mode
+V up/down to bring previous commands
