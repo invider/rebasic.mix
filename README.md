@@ -20,7 +20,7 @@ Just observe, how kids learn to write and count. At some point they might compil
 And that is exactly what classic BASIC offers only now with a computer.
 
 Back in 2006, David Brin published [an article called "Why Johnny can't code"](https://www.salon.com/2006/09/14/basic_2/).
-It caused a lot of debates on public forums (besides a ton of hate mail to the author by "professional" programmers trying to prove that Java/C#/C++ are so much better that BASIC).
+It caused a lot of debates on public forums (besides a ton of hate mail to the author by "professional" programmers trying to prove that Java/C#/C++ are so much better than BASIC).
 
 Microsoft, famous for it's BASIC implementations in the past, created and published Small Basic to address the issues highlighted in the article. But, although it is a great dev environment, it still got a lot of things wrong. It lacks interactivity, line numbers and most of all - its core features are object oriented. The later is the biggest shortcomming, since even the simplest operations like printing require a cumbersome object manipulation, e.g.:
 
@@ -43,9 +43,9 @@ Compare that to the original:
 PRINT "HELLO, BASIC"
 ```
 
-How can you get any simpler that that? It is just a command following by a string. You are telling the computer to print out a string. Plain and simple. No object, no boilerplate, no noise.
+How can you get any simpler that that? It is just a command following by a string. You are telling the computer to print out a string. Plain and simple. No objects, no boilerplate, no noise.
 
-And that is how it is supposed to be in a learing environment. That is how it is in _ReBasic_.
+_And that is how it is supposed to be in a learing environment._ That is how it is in _ReBasic_.
 
 
 
@@ -74,6 +74,17 @@ Some samples can be found here:
 
 ## Reference
 
+You can get help directly in the web shell by typing the _help_ command:
+```
+help
+```
+
+Or get help on particular command or function:
+```
+help abs
+```
+
+
 ### Commands
 * print <str>... - print provided values
 * list [from],[to] - list the lines of current program
@@ -88,6 +99,7 @@ Some samples can be found here:
 * load [name] - load a program from file
 * save [name] - save current program to a file
 * help [name] - list all commands and functions or show help for particular command/function
+
 
 ### Functions
 
