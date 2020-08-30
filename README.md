@@ -54,21 +54,69 @@ _And that is how it is supposed to be in a learing environment._ That is how it 
 Here is the cannonical "Hello World!" in ReBasic:
 
 ```
-print "hello, basic!"
+PRINT "HELLO, BASIC!"
 ```
 
 or as a runnable program:
 
 ```
-10 print "hello, basic!"
-run
+10 PRINT "HELLO, BASIC!"
 ```
+
+You can see the program listing with _LIST_ and run it with _RUN_:
+
+```
+LIST
+CLS
+RUN
+```
+
+CLS command clears the screen before run.
+
+Let's try to create something more complex:
+
+```
+5 rem calculate number of seconds in a day
+10 cls
+20 let s=60
+30 let m=60
+40 let h=24
+50 let ds=s*m*h
+60 print "seconds in a day:",ds
+```
+
+On lines 20-40 we are defining 3 variables to store the number of seconds in a minute,
+the number of minutes in an hour and the number of hours in a day.
+
+On line 50 we are calculating the number of seconds in a day by multiplying all tree variables.
+
+Later, that value get printed.
+
 
 
 ### Samples
-Some samples can be found here:
+
+There are a bunch of samples in
+[ReBasic ROM](https://github.com/invider/rebasic.mix/tree/master/mod/lib/rom).
+
+You can load and run them as simple as that:
+```
+LOAD "PALETTE"
+LIST
+RUN
+```
+
+Also, some samples can be found here:
 
 [Mark's Journey to the Land of ReBasic](https://github.com/invider/rebasic-journey)
+
+You can download files locally, then just type:
+
+```
+LOAD
+```
+
+And point to the needed \*.bas file in a dialog window.
 
 
 
