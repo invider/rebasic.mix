@@ -1,4 +1,4 @@
-5 rem calculate number of seconds in a day
+5 rem calculate the number of seconds in a day
 10 cls
 20 let s=60
 30 let m=60

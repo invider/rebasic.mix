@@ -3,12 +3,12 @@
 
 ## Welcome Back to Basic
 
-_ReBasic Web Edition_ is a web-based shell for _ReBasic, a simple and interactive retro-dialect of BASIC.
+_ReBasic Web Edition_ is a web-based shell for _ReBasic_, a simple and interactive retro-dialect of BASIC.
 
 _ReBasic_ stands for _Return to BASICs_ or _Retro BASIC_ or maybe _Reimplemented BASIC_. We are not quite sure yet...
 
-_ReBasic_ tries to preserve interactivity and simplicity of BASIC on the old 8-bit era microcomputers.
-There are line numbers, clutterless interactive mode and a minimalistic environment.
+_ReBasic_ tries to preserve the interactivity and simplicity of BASIC on the old 8-bit era microcomputers.
+There are line numbers, clutterless interactive mode, and a minimalistic environment.
 And we believe, these are crucial for beginners to grok the programming.
 
 This project contains only a web shell and related functions and utilities.
@@ -18,17 +18,17 @@ in [ReBasic Project](https://github.com/invider/rebasic).
 
 
 ## Design Goals
-Most modern implementation of BASIC are quite sofisticated programming languages. Usually they have support for advanced features like sofisticated data structures, objects and rich runtime environment.
+Most modern implementations of BASIC are quite sophisticated. Usually, they have support for advanced features like sophisticated data structures, objects, and a rich runtime environment.
 
-BASIC is ridiculed for line numbers. Modern BASIC implementations drop them completely. And although _ReBasic_ allows you skip numbers, we consider them crucial to understanding of algorithms and the execution flow.
+BASIC is ridiculed for line numbers. Modern BASIC implementations drop them completely. And although _ReBasic_ allows you to skip numbers, we consider them crucial to the understanding of algorithms and execution flow.
 
-Just observe, how kids learn to write and count. At some point they might compile a numered lists of items or actions.
+Just observe, how kids learn to write and count. At some point, they might compile numbered lists of items or actions.
 And that is exactly what classic BASIC offers only now with a computer.
 
 Back in 2006, David Brin published [an article called "Why Johnny can't code"](https://www.salon.com/2006/09/14/basic_2/).
-It caused a lot of debates on public forums (besides a ton of hate mail to the author by "professional" programmers trying to prove that Java/C#/C++ are so much better than BASIC).
+It caused a lot of debates on public forums (besides a ton of hate mail to the author by "professional" programmers trying to prove that Java/C#/C++ is so much better than BASIC).
 
-Microsoft, famous for it's BASIC implementations in the past, created and published Small Basic to address the issues highlighted in the article. But, although it is a great dev environment, it still got a lot of things wrong. It lacks interactivity, line numbers and most of all - its core features are object oriented. The later is the biggest shortcomming, since even the simplest operations like printing require a cumbersome object manipulation, e.g.:
+Microsoft, famous for its BASIC implementations in the past, created and published Small Basic to address the issues highlighted in the article. But, although it is a great dev environment, it still got a lot of things wrong. It lacks interactivity, line numbers, and most of all - its core features are object-oriented. The later is the biggest shortcoming since even the simplest operations like printing require a cumbersome object manipulation, e.g.:
 
 ```
 TextWindow.WriteLine("Hello, Basic")
@@ -36,28 +36,28 @@ TextWindow.WriteLine("Hello, Basic")
 
 What is that _TextWindow_ thingy?
 Why do I even need that to print a simple line?
-Why is it neccessary to capitalize WriteLine?
+Why is it necessary to capitalize WriteLine?
 Do I really need parentheses for that?
 
 Ugly...
-To much boilerplate...
-To much clutter...
-To many concepts to understand in order to print a simple line.
+Too much boilerplate...
+Too much clutter...
+Too many concepts to understand just to print a simple line.
 
 Compare that to the original:
 ```
 PRINT "HELLO, BASIC"
 ```
 
-How can you get any simpler that that? It is just a command following by a string. You are telling the computer to print out a string. Plain and simple. No objects, no boilerplate, no noise.
+How can you get any simpler than that? It is just a command following by a string. You are telling the computer to print out a string. Plain and simple. No objects, no boilerplate, no noise.
 
-_And that is how it is supposed to be in a learing environment._ That is how it is in _ReBasic_.
+_And that is how it is supposed to be in a learning environment._ That is how it is in _ReBasic_.
 
 
 
 ## Getting Started
 
-Here is the cannonical "Hello World!" in ReBasic:
+Here is the canonical "Hello World!" in ReBasic:
 
 ```
 PRINT "HELLO, BASIC!"
@@ -77,12 +77,12 @@ CLS
 RUN
 ```
 
-CLS command clears the screen before run.
+CLS command clears the screen before the run.
 
 Let's try to create something more complex:
 
 ```
-5 rem calculate number of seconds in a day
+5 rem calculate the number of seconds in a day
 10 cls
 20 let s=60
 30 let m=60
@@ -94,9 +94,9 @@ Let's try to create something more complex:
 On lines 20-40 we are defining 3 variables to store the number of seconds in a minute,
 the number of minutes in an hour and the number of hours in a day.
 
-On line 50 we are calculating the number of seconds in a day by multiplying all tree variables.
+On line 50 we are calculating the number of seconds in a day by multiplying all three variables.
 
-Later, that value get printed.
+Later, that value gets printed.
 
 
 
