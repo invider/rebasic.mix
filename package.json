@@ -10,7 +10,6 @@
         "collider-dev.mix": "git+https://github.com/invider/collider-dev.mix.git",
         "collider.jam": "git+https://github.com/invider/collider.jam.git",
         "collider.mix": "git+https://github.com/invider/collider.mix.git",
-        "jam-basic": "git+https://github.com/invider/rebasic.git",
         "rebasic": "git+https://github.com/invider/rebasic.git"
     },
     "repository": "https://github.com/invider/rebasic.mix.git",
