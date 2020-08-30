@@ -11,6 +11,12 @@ _ReBasic_ tries to preserve interactivity and simplicity of BASIC on the old 8-b
 There are line numbers, clutterless interactive mode and a minimalistic environment.
 And we believe, these are crucial for beginners to grok the programming.
 
+This project contains only a web shell and related functions and utilities.
+The ReBasic interpreter itself and its core functions are located
+in [ReBasic Project](https://github.com/invider/rebasic).
+
+
+
 ## Design Goals
 Most modern implementation of BASIC are quite sofisticated programming languages. Usually they have support for advanced features like sofisticated data structures, objects and rich runtime environment.
 
