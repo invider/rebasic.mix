@@ -3,21 +3,28 @@ const io = {
     open: function() {},
     
     print: function(line) {
-        let comma = true
+        let semi = false
+        let comma = false
+
         for (let i = 0; i < arguments.length; i++) {
             let val = arguments[i]
             if (val === undefined) val = ''
 
-            if (typeof val === 'object' && val.semi) {
-                comma = false
-
+            if (typeof val === 'object') {
+                if (val.semi) {
+                    semi = true
+                } else if (val.comma) {
+                    comma = true
+                }
             } else {
                 if (i > 0 && comma) lab.textmode.outc(' ')
-                lab.textmode.printout(val)
-                comma = true
+                lab.textmode.printout('' + val)
+                semi = false
+                comma = false
             }
         }
-        if (comma) lab.textmode.outc('\n')
+        if (comma) lab.textmode.outc(' ')
+        if (!semi && !comma) lab.textmode.outc('\n')
     },
 
     input: function() {
