@@ -1,3 +1,7 @@
+> on - goto statement
+> on - gosum statement
+> defun for function declaration
+> subroutines
 > proper line mapping on load
 > ! commands to clear the screen - like run! and list!
 > default palette
@@ -17,6 +21,8 @@
 > screen buffer support
 > native js functions
 
+V dim and map declaration list
+V read for dim and map
 V sleep
 V box
 V line

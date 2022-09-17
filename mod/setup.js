@@ -2,6 +2,9 @@ function setupVM() {
     const vm = mod.rebasic.arch.vm()
     vm.lexFromSource = mod.rebasic.arch.lex
     vm.parse = mod.rebasic.arch.parser
+
+    vm.opt.errToConsole = true
+    if (env.config && env.config.debug) vm.opt.debug = true
             
     const core = mod.rebasic.lib.core
     for (let n in core) vm.defineCmd(n, core[n])
