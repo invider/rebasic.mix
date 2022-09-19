@@ -13,7 +13,14 @@ function sync(cmd) {
 }
 
 function inputKey(c) {
-    if (c === "'") c = '"'
+    // escape non-ascii and control characters
+    const code = c.charCodeAt(0)
+    if (code < 32 || code > 126) return
+
+    //if (c === "'") c = '"'
+    //if (c === '&') return
+    //if (c === '{') c = '['
+    //if (c === '}') c = ']'
 
     this.buf.push(c)
     const nextLine = lab.textmode.outc(c)

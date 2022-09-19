@@ -27,13 +27,6 @@ function adjust() {
     this.fw = 5
     this.fh = 10
 
-    // operator
-    this.font = 'px pixel-operator-mono8'
-    this.fontSize = 8
-    this.curSize = 8
-    this.curShift = 0
-    this.fw = 8
-    this.fh = 12
 
     // basis33
     this.font = 'px basis33'
@@ -42,12 +35,29 @@ function adjust() {
     this.curShift = 1
     this.fw = 4
     this.fh = 8
-    */
+
+    // operator
+    this.font = 'px pixel-operator-mono8'
+    this.fontSize = 6
+    this.curSize = 8
+    this.curShift = -1
+    this.fw = 6
+    this.fh = 10
+
     // typewriter
     this.font = 'px typewriter'
     this.fontSize = 6
     this.curSize = 8
     this.curShift = 0
+    this.fw = 5
+    this.fh = 10
+    */
+
+    // monogram
+    this.font = 'px monogram'
+    this.fontSize = 12
+    this.curSize = 8
+    this.curShift = 2
     this.fw = 5
     this.fh = 10
 
