@@ -47,5 +47,15 @@ const io = {
         lab.textmode.clear()
     },
 
+    rom: function() {
+        const vm = this
+        vm.command.print('=== ROM EXAMPLES ===')
+        Object.keys(lib.rom._dir).forEach(key => {
+            vm.command.print(key)
+        })
+    },
+
     close: function() {},
 }
+
+io.rom.man = 'list examples from rom'
