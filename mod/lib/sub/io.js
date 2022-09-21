@@ -51,8 +51,9 @@ const io = {
         const vm = this
         vm.command.print('=== ROM EXAMPLES ===')
         Object.keys(lib.rom._dir).forEach(key => {
-            vm.command.print(key)
+            vm.command.print(key + ' ', { semi: true })
         })
+        vm.command.print('')
     },
 
     close: function() {},

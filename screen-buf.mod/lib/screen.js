@@ -1,52 +1,49 @@
 const palette = [
-
-
     //'#000000', // black
     //'#dc322f', // red
 ]
 
 const colors = {
-
-    'yellow':   '#b58900', // solar
-    'orange':   '#cb4b16', // solar
+    'yellow':   '#b58900',      // solar - yellow
+    'orange':   '#cb4b16',      // solar - orange
     'purple':   '#5d275d',
-    'red':      '#e9362b', // solar
-    'magenta':  '#d33682', // solar
+    'red':      '#e9362b',      // solar - red
+    'magenta':  '#d33682',      // solar - magenta
 
-    'dark blue': '#29366f', // dark blue
-    'violet':   '#6c71c4', // solar
-    'some blue': '#3b5dc9', // blue
-    'blue':     '#268bd2', // solar
-    'sky':      '#41a6f6', // sky
-    'not-cyan': '#73eff7', // cyan
+    'dark blue': '#29366f',     // dark blue
+    'violet':    '#6c71c4',      // solar - violet
+    'some blue': '#3b5dc9',     // blue
+    'blue':      '#268bd2',      // solar - blue
+    'sky':       '#41a6f6',      // sky
+    'not-cyan':  '#73eff7',      // cyan
 
-    'deep-teal': '#002b36', // base 03
-    'base-teal': '#073642', // base 02
-    'ocean':     '#257179', // darker teal
-    'teal':      '#2aa198', // solar - cyan
+    'deep-teal': '#002b36',     // solar - base 03
+    'base-teal': '#073642',     // solar - base 02
+    'ocean':     '#257179',     // darker teal
+    'teal':      '#2aa198',     // solar - cyan
 
-    'green':    '#859900', // solar
-    'grass':    '#38b764', // green
-    'salad':    '#a7f070', // salad
+    'green':    '#859900',      // solar - green
+    'grass':    '#38b764',      // green
+    'salad':    '#a7f070',      // salad
 
-    'base01':   '#586e75', // base 01
-    'base00':   '#657b83', // base 00
-    'base0':    '#839496', // base 0
-    'base1':    '#93a1a1', // base 1
-    'metal':    '#94b0c2', // metal
-    'dark-metal': '#566c86', // dark metal
-    'gray-blue':  '#333c57', // grayish blue
-    'bluisn-black': '#1a1c2c', // bluish black
-    'black':    '#252527',
-    'white':    '#fdf6e3', // base 3
-    'pale-mocca':  '#eee8d5', // base 2 - pale mocca
-    'pale-yellow': '#d1cf94', // pale yellow paper
-    'brown':    '#d98148',
-    'dark-orange': '#ef7d57', // orange
-    'dark-red': '#b13e53', // red
+    'base01':        '#586e75', // solar - base 01
+    'base00':        '#657b83', // solar - base 00
+    'base0':         '#839496', // solar - base 0
+    'base1':         '#93a1a1', // solar - base 1
+    'metal':         '#94b0c2', // metal
+    'dark-metal':    '#566c86', // dark metal
+    'gray-blue':     '#333c57', // grayish blue
+    'bluisn-black':  '#1a1c2c', // bluish black
+    'black':         '#252527',
+    'white':         '#fdf6e3', // base 3
+    'pale-mocca':    '#eee8d5', // base 2 - pale mocca
+    'pale-yellow':   '#d1cf94', // pale yellow paper
+    'brown':         '#d98148',
+    'dark-orange':   '#ef7d57', // orange
+    'dark-red':      '#b13e53', // red
     'bright-yellow': '#ffcd75', // yellow
 
-    'gray':     '#808080',
+    'gray':          '#808080',
 }
 
 Object.values(colors).forEach(c => palette.push(c))
@@ -94,4 +91,30 @@ const screen = {
         ctx.fillStyle = c
         ctx.fillRect(x, y, w, h)
     },
+
+    color: function(faceColor, backgroundColor, borderColor) {
+        if (faceColor && isNumber(faceColor)) {
+            this.command.ink(faceColor)
+        }
+        if (backgroundColor && isNumber(backgroundColor)) {
+            this.command.paper(backgroundColor)
+        }
+        if (borderColor && isNumber(borderColor)) {
+            // TODO set border color here
+        }
+    },
 }
+
+// aliases
+screen.paper = screen.background
+screen.ink   = screen.face
+
+screen.background.usage = '[color]'
+screen.background.man = 'set background(paper) color'
+
+screen.paper.usage = '[color]'
+screen.paper.man = 'set background(paper) color'
+
+screen.color.usage = "<face>, <background>, <border>"
+screen.color.man =   "set colors"
+
