@@ -49,58 +49,65 @@ const colors = {
 Object.values(colors).forEach(c => palette.push(c))
 
 function mapColor(ci) {
-    let c = color
+    let c
     if (isNumber(ci)) {
-        c = palette[ci | 0] || color
-        color = c
+        c = palette[ci | 0]
     } else if (isString(ci)) {
         if (ci.startsWith('#')) {
             c = ci
         } else {
-            const cn = colors[ci]
+            const cn = colors[ci.toLowerCase()]
             if (cn) c = ci
         }
-        color = c
     }
     return c
 }
 
-let color = '#000000'
-
 const screen = {
 
     background: function(ci) {
-        let c = mapColor(ci)
+        const c = mapColor(ci)
+        if (!c) return
         ctx.fillStyle = c
         ctx.fillRect(0, 0, rx(1), ry(1))
+        env.tune.background = c
     },
 
     face: function(ci) {
-        let c = mapColor(ci)
+        const c = mapColor(ci)
+        if (!c) return
         env.tune.face = c
+    },
+
+    border: function(ci) {
+        const c = mapColor(ci)
+        if (!c) return
+        env.tune.border = c
     },
 
     plot: function(x, y, ci) {
         let c = mapColor(ci)
+        if (!c) return
         ctx.fillStyle = c
         ctx.fillRect(x, y, 1, 1)
     },
 
     box: function(x, y, w, h, ci) {
         let c = mapColor(ci)
+        if (!c) return
         ctx.fillStyle = c
         ctx.fillRect(x, y, w, h)
     },
 
     color: function(faceColor, backgroundColor, borderColor) {
-        if (faceColor && isNumber(faceColor)) {
+        if (faceColor && typeof faceColor !== 'object') {
             this.command.ink(faceColor)
         }
-        if (backgroundColor && isNumber(backgroundColor)) {
+        if (backgroundColor && typeof backgroundColor !== 'object') {
             this.command.paper(backgroundColor)
         }
-        if (borderColor && isNumber(borderColor)) {
-            // TODO set border color here
+        if (borderColor && typeof borderColor !== 'object') {
+            this.command.border(borderColor)
         }
     },
 }
@@ -114,6 +121,9 @@ screen.background.man = 'set background(paper) color'
 
 screen.paper.usage = '[color]'
 screen.paper.man = 'set background(paper) color'
+
+screen.border.usage = '[color]'
+screen.border.man = 'set border color'
 
 screen.color.usage = "<face>, <background>, <border>"
 screen.color.man =   "set colors"
