@@ -65,18 +65,18 @@ function mapColor(ci) {
 
 const screen = {
 
-    background: function(ci) {
+    ink: function(ci) {
+        const c = mapColor(ci)
+        if (!c) return
+        env.tune.ink = c
+    },
+
+    paper: function(ci) {
         const c = mapColor(ci)
         if (!c) return
         ctx.fillStyle = c
         ctx.fillRect(0, 0, rx(1), ry(1))
-        env.tune.background = c
-    },
-
-    face: function(ci) {
-        const c = mapColor(ci)
-        if (!c) return
-        env.tune.face = c
+        env.tune.paper = c
     },
 
     border: function(ci) {
@@ -86,7 +86,7 @@ const screen = {
     },
 
     plot: function(x, y, ci) {
-        let c = mapColor(ci)
+        const c = mapColor(ci) || env.tune.ink
         if (!c) return
         ctx.fillStyle = c
         ctx.fillRect(x, y, 1, 1)
@@ -113,8 +113,8 @@ const screen = {
 }
 
 // aliases
-screen.paper = screen.background
-screen.ink   = screen.face
+screen.background = screen.paper
+screen.face = screen.ink
 
 screen.background.usage = '[color]'
 screen.background.man = 'set background(paper) color'
@@ -124,6 +124,12 @@ screen.paper.man = 'set background(paper) color'
 
 screen.border.usage = '[color]'
 screen.border.man = 'set border color'
+
+screen.ink.usage = '[color]'
+screen.ink.man = 'set ink color'
+
+screen.face.usage = '[color]'
+screen.face.man = 'set ink color'
 
 screen.color.usage = "<face>, <background>, <border>"
 screen.color.man =   "set colors"

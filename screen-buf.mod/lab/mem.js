@@ -23,7 +23,7 @@ function drawNoise() {
 function clean() {
     const w = env.width
     const h = env.height
-    fill(env.tune.background)
+    fill(env.tune.paper)
     rect(0, 0, w, h)
 }
 
@@ -34,7 +34,7 @@ function paint() {
     //this.generateNoise(w, h)
 
     save()
-    fill(env.tune.background)
+    fill(env.tune.paper)
     rect(0, 0, w, h)
 
     lineWidth(2)
