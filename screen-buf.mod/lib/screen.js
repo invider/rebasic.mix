@@ -72,11 +72,16 @@ const screen = {
     },
 
     paper: function(ci) {
-        const c = mapColor(ci)
-        if (!c) return
-        ctx.fillStyle = c
-        ctx.fillRect(0, 0, rx(1), ry(1))
-        env.tune.paper = c
+        if (!ci) {
+            ctx.fillStyle = env.tune.paper
+            ctx.fillRect(0, 0, rx(1), ry(1))
+        } else {
+            const c = mapColor(ci)
+            if (!c) return
+            ctx.fillStyle = c
+            ctx.fillRect(0, 0, rx(1), ry(1))
+            env.tune.paper = c
+        }
     },
 
     border: function(ci) {
@@ -133,4 +138,7 @@ screen.face.man = 'set ink color'
 
 screen.color.usage = "<face>, <background>, <border>"
 screen.color.man =   "set colors"
+
+screen.plot.usage = "[x], [y], <color>"
+screen.plot.man = "draw a pixel"
 

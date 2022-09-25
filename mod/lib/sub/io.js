@@ -45,6 +45,7 @@ const io = {
 
     cls: function() {
         lab.textmode.clear()
+        this.command.paper()
     },
 
     rom: function() {
@@ -59,4 +60,9 @@ const io = {
     close: function() {},
 }
 
+io.cls.man = 'clear the screen'
+
 io.rom.man = 'list examples from rom'
+
+io.close.service = true // hide from help
+
