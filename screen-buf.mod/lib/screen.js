@@ -46,6 +46,11 @@ const colors = {
     'gray':          '#808080',
 }
 
+const context = {
+    x: 0,
+    y: 0,
+}
+
 Object.values(colors).forEach(c => palette.push(c))
 
 function mapColor(ci) {
@@ -94,7 +99,20 @@ const screen = {
         const c = mapColor(ci) || env.tune.ink
         if (!c) return
         ctx.fillStyle = c
+        env.tune.ink = c
         ctx.fillRect(x, y, 1, 1)
+        // cache coordinates in the graphical context
+        context.x = x
+        context.y = y
+        env.tune.ink = c
+    },
+
+    drawto: function(x, y) {
+        ctx.strokeStyle = env.tune.ink
+        lineWidth(1)
+        line(context.x+.5, context.y+.5, x+.5, y+.5)
+        context.x = x
+        context.y = y
     },
 
     box: function(x, y, w, h, ci) {
@@ -141,4 +159,7 @@ screen.color.man =   "set colors"
 
 screen.plot.usage = "[x], [y], <color>"
 screen.plot.man = "draw a pixel"
+
+screen.drawto.usage = "[x], [y]"
+screen.drawto.man = "draw a line to coordinates"
 
