@@ -33,8 +33,7 @@ const io = {
             const v = arguments[i]
 
             if (typeof v === 'object' && v.id) {
-                this.inputTarget = v.id
-                this.assign(v.id, 'waiting for values')
+                this.inputTarget = v
             } else {
                 lab.textmode.printout('' + v + ' ')
                 //process.stdout.write('' + v + ' ')
