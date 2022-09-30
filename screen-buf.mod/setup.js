@@ -1,6 +1,6 @@
 function setup() {
-    const W = _$.env.tune.width
-    const H = _$.env.tune.height
+    const W = _$.env.context.width
+    const H = _$.env.context.height
 
     const canvas = ctx.canvas
 

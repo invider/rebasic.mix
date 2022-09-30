@@ -1,7 +1,7 @@
 const Z = 1
 
 function draw() {
-    background(env.tune.border)
+    background(env.context.border)
 
     const base = env.height < env.width? env.height : env.width
     env.tune.edge = base * .05

@@ -15,8 +15,8 @@ function init() {
 }
 
 function adjust() {
-    const W = env.tune.width
-    const H = env.tune.height
+    const W = env.context.width
+    const H = env.context.height
 
     /*
     // cool
@@ -185,7 +185,7 @@ function draw() {
 
     for (let y = 0, l1 = th; y < l1; y++) {
         for (let x = 0, l2 = tw; x < l2; x++) {
-            fill(env.tune.ink)
+            fill(env.context.ink)
             const c = cell[y*tw + x] || '?'
             text(c, x*fw*scale, y*fh*scale)
         }
@@ -194,7 +194,7 @@ function draw() {
     if (this.timer % 1 < .5) {
         if (this.cx >= 0 && this.cx < tw
                 && this.cy >= 0 && this.cy < th) {
-            fill(env.tune.ink)
+            fill(env.context.ink)
             rect(this.cx*fw*scale,
                     (this.cy*fh + this.curShift)*scale,
                     fw*scale, this.curSize*scale)

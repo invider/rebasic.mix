@@ -73,44 +73,44 @@ const screen = {
     ink: function(ci) {
         const c = mapColor(ci)
         if (!c) return
-        env.tune.ink = c
+        env.context.ink = c
     },
 
     paper: function(ci) {
         if (!ci) {
-            ctx.fillStyle = env.tune.paper
+            ctx.fillStyle = env.context.paper
             ctx.fillRect(0, 0, rx(1), ry(1))
         } else {
             const c = mapColor(ci)
             if (!c) return
             ctx.fillStyle = c
             ctx.fillRect(0, 0, rx(1), ry(1))
-            env.tune.paper = c
+            env.context.paper = c
         }
     },
 
     border: function(ci) {
         const c = mapColor(ci)
         if (!c) return
-        env.tune.border = c
+        env.context.border = c
     },
 
     plot: function(x, y, ci) {
-        const c = mapColor(ci) || env.tune.ink
+        const c = mapColor(ci) || env.context.ink
         if (!c) return
         ctx.fillStyle = c
-        env.tune.ink = c
+        env.context.ink = c
         ctx.fillRect(x, y, 1, 1)
         // cache coordinates in the graphical context
         context.x = x
         context.y = y
-        env.tune.ink = c
+        env.context.ink = c
     },
 
     drawto: function(x, y) {
-        ctx.strokeStyle = env.tune.ink
+        ctx.strokeStyle = env.context.ink
         lineWidth(1)
-        line(context.x+.5, context.y+.5, x+.5, y+.5)
+        line(context.x + .5, context.y + .5, x + .5, y + .5)
         context.x = x
         context.y = y
     },
