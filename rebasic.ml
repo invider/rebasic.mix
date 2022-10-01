@@ -1,3 +1,7 @@
+> run X - run from a number
+> line editor with move, insert, delete
+> set autonumbering value
+> shift numbers
 > on - goto statement
 > on - gosum statement
 > defun for function declaration

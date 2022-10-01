@@ -60,6 +60,7 @@ const io = {
 }
 
 io.cls.man = 'clear the screen'
+io.home = io.cls
 
 io.rom.man = 'list examples from rom'
 
