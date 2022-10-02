@@ -47,6 +47,14 @@ const io = {
         this.command.paper()
     },
 
+    htab: function(x) {
+        lab.textmode.htab(x)
+    },
+
+    vtab: function(y) {
+        lab.textmode.vtab(y)
+    },
+
     rom: function() {
         const vm = this
         vm.command.print('=== ROM EXAMPLES ===')
@@ -63,6 +71,9 @@ io.cls.man = 'clear the screen'
 io.home = io.cls
 
 io.rom.man = 'list examples from rom'
+
+io.htab.man = 'set horizontal cursor position'
+io.vtab.man = 'set vertical cursor position'
 
 io.close.service = true // hide from help
 

@@ -164,6 +164,16 @@ function backspace() {
     this.putc(SPACE, this.cx, this.cy)
 }
 
+function htab(x) {
+    if (!x) return
+    this.cx = limit(x - 1, 0, this.tw - 1)
+}
+
+function vtab(y) {
+    if (!y) return
+    this.cy = limit(y - 1, 0, this.th - 1)
+}
+
 function evo(dt) {
     this.timer += dt
 }
