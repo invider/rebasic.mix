@@ -1,4 +1,5 @@
 function init() {
+    this.cur = 0
     this.buf = []
     this.history = []
     this.historyPos = 0
@@ -54,6 +55,7 @@ function command(cmd) {
 function enter() {
     lab.textmode.returnCursor()
     this.command(this.buf.join(''))
+    this.cur = 0
     this.buf = []
 }
 
@@ -77,4 +79,28 @@ function next() {
         }
         this.sync(cmd)
     }
+}
+
+function home() {
+    const shift = this.buf.length - abs(this.cur)
+    for (let i = 0; i < shift; i++) this.left()
+}
+
+function right() {
+    if (this.cur < 0) {
+        this.cur ++
+        lab.textmode.right()
+    }
+}
+
+function left() {
+    const pos = abs(this.cur)
+    if (pos < this.buf.length) {
+        this.cur --
+        lab.textmode.left()
+    }
+}
+
+function end() {
+    while(this.cur < 0) this.right()
 }

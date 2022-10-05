@@ -153,7 +153,38 @@ function println(line) {
     this.returnCursor()
 }
 
+function left() {
+    this.timer = 0
+    if (this.cx === 0) {
+        if (this.cy > 0) {
+            this.cy --
+            this.cx = this.tw - 1
+        } else {
+            return false // unable to move left
+        }
+    } else {
+        this.cx --
+    }
+    return true
+}
+
+function right() {
+    this.timer = 0
+    if (this.cx >= this.tw - 1) {
+        if (this.cy < this.th - 1)  {
+            this.cy ++
+            this.cx = 0
+        } else {
+            return false // unable to move right
+        }
+    } else {
+        this.cx ++
+    }
+    return true
+}
+
 function backspace() {
+    /*
     this.timer = 0
     if (this.cx === 0) {
         this.cy --
@@ -161,6 +192,8 @@ function backspace() {
     } else {
         this.cx --
     }
+    */
+    this.left()
     this.putc(SPACE, this.cx, this.cy)
 }
 

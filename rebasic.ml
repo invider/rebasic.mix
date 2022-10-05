@@ -1,4 +1,3 @@
-> run X - run from a number
 > line editor with move, insert, delete
 > set autonumbering value
 > shift numbers
@@ -25,6 +24,7 @@
 > screen buffer support
 > native js functions
 
+V run X - run from a number
 V dim and map declaration list
 V read for dim and map
 V sleep

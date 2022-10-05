@@ -30,6 +30,19 @@ function keyDown(e) {
             case 'ArrowDown':
                 lab.ioCtrl.next()
                 break
+
+            case 'Home':
+                lab.ioCtrl.home()
+                break
+            case 'ArrowLeft':
+                lab.ioCtrl.left()
+                break
+            case 'ArrowRight':
+                lab.ioCtrl.right()
+                break
+            case 'End':
+                lab.ioCtrl.end()
+                break
         }
     }
 }
