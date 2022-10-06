@@ -122,12 +122,24 @@ function setCursor(x, y) {
     this.cy = y
 }
 
+function getc(x, y) {
+    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
+    return this.cell[y * this.tw + x]
+}
 
-function putc(c, x, y) {
-    if (!c || c.length !== 1) return
-    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return
+function putc(x, y, c) {
+    if (!c || c.length !== 1) return // not a symbol
+    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
     //this.cell[y * this.tw + x] = c
     this.cell[y * this.tw + x] = c.toUpperCase()
+}
+
+function swap(x, y, c) {
+    if (!c || c.length !== 1) return // not a symbol
+    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
+    const s = this.cell[y * this.tw + x]
+    this.cell[y * this.tw + x] = c.toUpperCase()
+    return s
 }
 
 function outc(c) {
@@ -135,9 +147,29 @@ function outc(c) {
     if (c === '\n') {
         this.returnCursor()
     } else {
-        this.putc(c, this.cx, this.cy)
+        this.putc(this.cx, this.cy, c)
         return this.shiftCursor()
     }
+}
+
+function insc(c) {
+    // shift the first line
+    let tx = this.cx
+    let ty = this.cy
+    let s = this.getc(tx++, ty)
+    while (tx < this.tw) {
+        s = this.swap(tx, ty, s)
+        tx ++
+    }
+    while (ty < this.th) {
+        tx = 0
+        while(tx < this.w) {
+            s = this.swap(tx, ty, s)
+            tx ++
+        }
+        ty ++
+    }
+    this.outc(c)
 }
 
 function printout(line) {
@@ -194,7 +226,7 @@ function backspace() {
     }
     */
     this.left()
-    this.putc(SPACE, this.cx, this.cy)
+    this.putc(this.cx, this.cy, SPACE)
 }
 
 function htab(x) {

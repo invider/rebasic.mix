@@ -22,10 +22,16 @@ function inputKey(c) {
     //if (c === '&') return
     //if (c === '{') c = '['
     //if (c === '}') c = ']'
-
-    this.buf.push(c)
-    const nextLine = lab.textmode.outc(c)
-    if (nextLine) this.my --
+    
+    if (this.cur === 0) {
+        this.buf.push(c)
+        const nextLine = lab.textmode.outc(c)
+        if (nextLine) this.my --
+    } else if (this.cur < 0) {
+        const pos = this.buf.length - abs(this.cur)
+        this.buf.splice(pos, 0, c)
+        lab.textmode.insc(c)
+    }
 }
 
 function backspace() {
@@ -54,6 +60,7 @@ function command(cmd) {
 
 function enter() {
     lab.textmode.returnCursor()
+    //console.log(this.buf.join(''))
     this.command(this.buf.join(''))
     this.cur = 0
     this.buf = []
