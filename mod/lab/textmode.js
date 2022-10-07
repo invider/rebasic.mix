@@ -127,6 +127,17 @@ function getc(x, y) {
     return this.cell[y * this.tw + x]
 }
 
+// get the next char from the position
+function getnc(x, y) {
+    x++
+    if (x >= this.tw) {
+        x = 0
+        y++
+    }
+    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return SPACE
+    return this.cell[y * this.tw + x]
+}
+
 function putc(x, y, c) {
     if (!c || c.length !== 1) return // not a symbol
     if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
@@ -170,6 +181,9 @@ function insc(c) {
         ty ++
     }
     this.outc(c)
+}
+
+function del() {
 }
 
 function printout(line) {
@@ -216,17 +230,29 @@ function right() {
 }
 
 function backspace() {
-    /*
-    this.timer = 0
-    if (this.cx === 0) {
-        this.cy --
-        this.cx = this.tw - 1
-    } else {
-        this.cx --
-    }
-    */
     this.left()
     this.putc(this.cx, this.cy, SPACE)
+}
+
+function backshift() {
+    this.backspace()
+
+    let tx = this.cx
+    let ty = this.cy
+    // shift the first line
+    while (tx < this.tw) {
+        const nextc = this.getnc(tx, ty)
+        this.putc(tx, ty, nextc)
+        tx ++
+    }
+    while (ty < this.th) {
+        tx = 0
+        while(tx < this.w) {
+            s = this.swap(tx, ty, s)
+            tx ++
+        }
+        ty ++
+    }
 }
 
 function htab(x) {

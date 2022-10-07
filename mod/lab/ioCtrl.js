@@ -36,8 +36,14 @@ function inputKey(c) {
 
 function backspace() {
     if (this.buf.length > 0) {
-        this.buf.splice(-1, 1)
-        lab.textmode.backspace()
+        if (this.cur < 0) {
+            const pos = this.buf.length - abs(this.cur)
+            this.buf.splice(pos-1, 1)
+            lab.textmode.backshift()
+        } else {
+            this.buf.splice(-1, 1)
+            lab.textmode.backspace()
+        }
     }
 }
 
@@ -60,7 +66,6 @@ function command(cmd) {
 
 function enter() {
     lab.textmode.returnCursor()
-    //console.log(this.buf.join(''))
     this.command(this.buf.join(''))
     this.cur = 0
     this.buf = []
