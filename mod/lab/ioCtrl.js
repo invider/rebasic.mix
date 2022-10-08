@@ -116,3 +116,12 @@ function left() {
 function end() {
     while(this.cur < 0) this.right()
 }
+
+function del() {
+    if (this.buf.length > 0 && this.cur < 0) {
+        const pos = this.buf.length - abs(this.cur)
+        this.buf.splice(pos, 1)
+        this.cur ++
+        lab.textmode.del()
+    }
+}

@@ -184,6 +184,8 @@ function insc(c) {
 }
 
 function del() {
+    this.right()
+    this.backshift()
 }
 
 function printout(line) {

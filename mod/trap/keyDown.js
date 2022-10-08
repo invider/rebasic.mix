@@ -43,6 +43,9 @@ function keyDown(e) {
             case 'End':
                 lab.ioCtrl.end()
                 break
+            case 'Delete':
+                lab.ioCtrl.del()
+                break
         }
     }
 }
