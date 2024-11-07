@@ -70,6 +70,10 @@ function mapColor(ci) {
 
 const screen = {
 
+    //
+    // === graphics commands ===
+    //
+
     ink: function(ci) {
         const c = mapColor(ci)
         if (!c) return
@@ -104,7 +108,6 @@ const screen = {
         // cache coordinates in the graphical context
         context.x = x
         context.y = y
-        env.context.ink = c
     },
 
     drawto: function(x, y) {
@@ -138,7 +141,11 @@ const screen = {
 // aliases
 screen.background = screen.paper
 screen.face = screen.ink
+screen.pset = screen.plot
 
+//
+// === help ===
+//
 screen.background.usage = '[color]'
 screen.background.man = 'set background(paper) color'
 
@@ -159,6 +166,9 @@ screen.color.man =   "set colors"
 
 screen.plot.usage = "[x], [y], <color>"
 screen.plot.man = "draw a pixel"
+
+screen.pset.usage = "[x], [y], <color>"
+screen.pset.man = "draw a pixel"
 
 screen.drawto.usage = "[x], [y]"
 screen.drawto.man = "draw a line to coordinates"
