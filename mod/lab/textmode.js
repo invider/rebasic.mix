@@ -63,10 +63,11 @@ function adjust() {
 
     this.tw = floor(W / this.fw) - 1
     this.th = floor(H / this.fh)
-    console.dir(this.th)
-    console.dir(H)
     this.dx = floor(W - this.tw*this.fw)/2
     this.dy = floor(H - this.th*this.fh)/2
+
+    env.context.columns = this.tw
+    env.context.rows    = this.th
 }
 
 function clear() {

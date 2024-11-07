@@ -67,6 +67,15 @@ const io = {
     close: function() {},
 }
 
+io.print.usage = '(val1),(val2);(val3);...'
+io.print.man = 'print out\n'
+       + '    the list of values,\n'
+       + '    a space is used when separated by [,],\n'
+       + '    nothing is used when separated by [;],\n'
+       + '    skip the new line when ended by [;],\n'
+       + '    [print] with no arguments prints a new line'
+
+
 io.cls.man = 'clear the screen'
 io.home = io.cls
 
