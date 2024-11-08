@@ -46,6 +46,12 @@ function keyDown(e) {
             case 'Delete':
                 lab.ioCtrl.del()
                 break
+            case 'PageUp':
+                lab.ioCtrl.pageUp()
+                break
+            case 'PageDown':
+                lab.ioCtrl.pageDown()
+                break
         }
     }
 }

@@ -125,3 +125,11 @@ function del() {
         lab.textmode.del()
     }
 }
+
+function pageUp() {
+    lab.textmode.pageUp()
+}
+
+function pageDown() {
+    lab.textmode.pageDown()
+}

@@ -9,6 +9,7 @@ function init() {
     this.timer = 0
     this.cx = 0
     this.cy = 0
+    this.bottomLine = 0
     this.cell = []
     this.adjust()
     this.clear()
@@ -53,6 +54,8 @@ function adjust() {
     this.fh = 10
     */
 
+    // TODO move out from adjust? Only dx/dy are variables here
+
     // monogram
     this.font = 'px monogram'
     this.fontSize = 12
@@ -71,34 +74,34 @@ function adjust() {
 }
 
 function clear() {
-    const w = this.tw
-    const h = this.th
-    const cell = this.cell
+    const tw = this.tw,
+          th = this.th
 
-    for (let y = 0; y < h; y++) {
-        for (let x = 0; x < w; x++) {
-            cell[y*w + x] = SPACE
-        }
+    this.cell = []
+    for (let i = 0; i < th * tw; i++) {
+        this.cell.push(SPACE)
     }
+    this.lastPage()
     this.cx = 0
-    this.cy = h - 1
+    this.cy = th - 1
 }
 
 function shiftScreen() {
     const w = this.tw
     const h = this.th
     const cell = this.cell
-
+    /*
     for (let y = 1; y < h; y++) {
         for (let x = 0; x < w; x++) {
             cell[(y-1)*w + x] = cell[y*w + x]
         }
     }
-
     const y = h - 1
+    */
     for (let x = 0; x < w; x++) {
-        cell[y*w + x] = SPACE
+        cell.push(SPACE)
     }
+    this.bottomLine = floor(cell.length / w) - 1
 }
 
 function returnCursor() {
@@ -124,33 +127,44 @@ function setCursor(x, y) {
 }
 
 function getc(x, y) {
-    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
-    return this.cell[y * this.tw + x]
+    if (x < 0 || x >= this.tw || y < 0 && y >= this.th) return SPACE // out of the screen area
+    const tw = this.tw,
+          th = this.th,
+          fy = this.bottomLine - (th - 1 - y)
+    return this.cell[fy * tw + x] || SPACE
 }
 
 // get the next char from the position
 function getnc(x, y) {
+    const tw = this.tw,
+          th = this.th
     x++
-    if (x >= this.tw) {
+    if (x >= tw) {
         x = 0
         y++
     }
-    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return SPACE
-    return this.cell[y * this.tw + x]
+    if (x < 0 || x >= tw || y < 0 || y >= th) return SPACE
+    const fy = this.bottomLine - (th - 1 - y)
+    return this.cell[fy * tw + x]
 }
 
 function putc(x, y, c) {
     if (!c || c.length !== 1) return // not a symbol
-    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
+    const tw = this.tw, th = this.th
+    if (x < 0 || x >= tw || y < 0 || y >= th) return // out of screen
     //this.cell[y * this.tw + x] = c
-    this.cell[y * this.tw + x] = c.toUpperCase()
+    const fy = this.bottomLine - (th - 1 - y)
+    this.cell[fy * tw + x] = c.toUpperCase()
 }
 
 function swap(x, y, c) {
     if (!c || c.length !== 1) return // not a symbol
-    if (x < 0 || x >= this.tw || y < 0 || y >= this.h) return // out of screen
-    const s = this.cell[y * this.tw + x]
-    this.cell[y * this.tw + x] = c.toUpperCase()
+    const tw = this.tw, th = this.th
+    if (x < 0 || x >= tw || y < 0 || y >= th) return // out of screen
+
+    const fy = this.bottomLine - (th - 1 - y),
+          s = this.cell[fy * this.tw + x]
+    this.cell[fy * this.tw + x] = c.toUpperCase()
     return s
 }
 
@@ -232,6 +246,19 @@ function right() {
     return true
 }
 
+function pageUp() {
+    if (this.bottomLine > this.th - 1) this.bottomLine --
+}
+
+function pageDown() {
+    const maxLine = (this.cell.length / this.tw) - 1
+    if (this.bottomLine < maxLine) this.bottomLine ++
+}
+
+function lastPage() {
+    this.bottomLine = this.th - 1
+}
+
 function backspace() {
     this.left()
     this.putc(this.cx, this.cy, SPACE)
@@ -282,15 +309,16 @@ function draw() {
     translate(x + this.dx*scale, y + this.dy*scale)
     font(this.fontSize * scale + this.font)
 
-    const tw = this.tw
-    const th = this.th
-    const fw = this.fw
-    const fh = this.fh
+    const tw = this.tw,
+          th = this.th,
+          fw = this.fw,
+          fh = this.fh
 
     for (let y = 0, l1 = th; y < l1; y++) {
         for (let x = 0, l2 = tw; x < l2; x++) {
             fill(env.context.ink)
-            const c = cell[y*tw + x] || '?'
+            const fy = this.bottomLine - (th - 1 - y)
+            const c = cell[fy*tw + x] || '?'
             text(c, x*fw*scale, y*fh*scale)
         }
     }
