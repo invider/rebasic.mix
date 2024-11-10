@@ -36,6 +36,7 @@ function keyDown(e) {
 
             case 'ArrowDown':
                 lab.ioCtrl.next()
+                break
             case 'Home':
                 lab.ioCtrl.home()
                 break

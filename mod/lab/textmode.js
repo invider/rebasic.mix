@@ -88,7 +88,7 @@ function clear() {
 }
 
 function touch() {
-    this.lastPage()
+    this.bottomLine = this.cell.length / this.tw - 1
 }
 
 function shiftScreen() {
@@ -271,7 +271,7 @@ function pageDown() {
 }
 
 function lastPage() {
-    this.bottomLine = this.cell.length / this.tw - 1
+    this.touch()
 }
 
 function isLastPage() {
