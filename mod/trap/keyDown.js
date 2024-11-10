@@ -5,6 +5,13 @@ function keyDown(e) {
             case 'Backspace':
                 lab.vm.stop()
                 break
+
+            case 'Home':
+                lab.ioCtrl.firstPage()
+                break
+            case 'End':
+                lab.ioCtrl.lastPage()
+                break
         }
 
     } else if (e.key.length === 1) {
@@ -29,8 +36,6 @@ function keyDown(e) {
 
             case 'ArrowDown':
                 lab.ioCtrl.next()
-                break
-
             case 'Home':
                 lab.ioCtrl.home()
                 break

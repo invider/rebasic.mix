@@ -1,3 +1,8 @@
+V fix scroll up edge
+V hide the cursor on page up
+V jump to the bottom on type in
+> individual color and background for each cell in the text mode
+> redefine the color palette
 > line editor with move, insert, delete
 > set autonumbering value
 > shift numbers

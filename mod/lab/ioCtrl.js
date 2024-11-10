@@ -60,6 +60,7 @@ function saveHistory(cmd) {
 }
 
 function command(cmd) {
+    lab.textmode.touch()
     this.saveHistory(cmd)
     lab.vm.inputHandler(cmd)
 }
@@ -72,6 +73,7 @@ function enter() {
 }
 
 function prev() {
+    lab.textmode.touch()
     if (this.historyPos > 0) {
         if (this.historyPos === this.history.length) {
             this.unexecuted = this.buf.join('')
@@ -83,6 +85,7 @@ function prev() {
 }
 
 function next() {
+    lab.textmode.touch()
     if (this.historyPos < this.history.length) {
         this.historyPos ++
         let cmd = this.history[this.historyPos]
@@ -94,11 +97,13 @@ function next() {
 }
 
 function home() {
+    lab.textmode.touch()
     const shift = this.buf.length - abs(this.cur)
     for (let i = 0; i < shift; i++) this.left()
 }
 
 function right() {
+    lab.textmode.touch()
     if (this.cur < 0) {
         this.cur ++
         lab.textmode.right()
@@ -106,6 +111,7 @@ function right() {
 }
 
 function left() {
+    lab.textmode.touch()
     const pos = abs(this.cur)
     if (pos < this.buf.length) {
         this.cur --
@@ -114,10 +120,12 @@ function left() {
 }
 
 function end() {
+    lab.textmode.touch()
     while(this.cur < 0) this.right()
 }
 
 function del() {
+    lab.textmode.touch()
     if (this.buf.length > 0 && this.cur < 0) {
         const pos = this.buf.length - abs(this.cur)
         this.buf.splice(pos, 1)
@@ -132,4 +140,12 @@ function pageUp() {
 
 function pageDown() {
     lab.textmode.pageDown()
+}
+
+function firstPage() {
+    lab.textmode.firstPage()
+}
+
+function lastPage() {
+    lab.textmode.lastPage()
 }

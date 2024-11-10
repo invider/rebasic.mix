@@ -1,6 +1,7 @@
 const Z = 2
 const SPACE = ' '
 
+// possible cursors - use rectangle for now
 //const CUR = '*'
 //const CUR = '_'
 //const CUR = '█'
@@ -86,6 +87,10 @@ function clear() {
     this.cy = th - 1
 }
 
+function touch() {
+    this.lastPage()
+}
+
 function shiftScreen() {
     const w = this.tw
     const h = this.th
@@ -122,6 +127,7 @@ function shiftCursor() {
 }
 
 function setCursor(x, y) {
+    this.touch()
     this.cx = x
     this.cy = y
 }
@@ -153,6 +159,7 @@ function putc(x, y, c) {
     const tw = this.tw, th = this.th
     if (x < 0 || x >= tw || y < 0 || y >= th) return // out of screen
     //this.cell[y * this.tw + x] = c
+    this.touch()
     const fy = this.bottomLine - (th - 1 - y)
     this.cell[fy * tw + x] = c.toUpperCase()
 }
@@ -162,6 +169,7 @@ function swap(x, y, c) {
     const tw = this.tw, th = this.th
     if (x < 0 || x >= tw || y < 0 || y >= th) return // out of screen
 
+    this.touch()
     const fy = this.bottomLine - (th - 1 - y),
           s = this.cell[fy * this.tw + x]
     this.cell[fy * this.tw + x] = c.toUpperCase()
@@ -169,6 +177,7 @@ function swap(x, y, c) {
 }
 
 function outc(c) {
+    this.touch()
     this.timer = 0
     if (c === '\n') {
         this.returnCursor()
@@ -179,6 +188,7 @@ function outc(c) {
 }
 
 function insc(c) {
+    this.touch()
     // shift the first line
     let tx = this.cx
     let ty = this.cy
@@ -199,11 +209,13 @@ function insc(c) {
 }
 
 function del() {
+    this.touch()
     this.right()
     this.backshift()
 }
 
 function printout(line) {
+    this.touch()
     line = line || ''
     line = '' + line
     for (let i = 0, ln = line.length; i < ln; i++) {
@@ -212,11 +224,13 @@ function printout(line) {
 }
 
 function println(line) {
+    this.touch()
     this.printout(line)
     this.returnCursor()
 }
 
 function left() {
+    this.touch()
     this.timer = 0
     if (this.cx === 0) {
         if (this.cy > 0) {
@@ -232,6 +246,7 @@ function left() {
 }
 
 function right() {
+    this.touch()
     this.timer = 0
     if (this.cx >= this.tw - 1) {
         if (this.cy < this.th - 1)  {
@@ -247,7 +262,7 @@ function right() {
 }
 
 function pageUp() {
-    if (this.bottomLine > this.th - 1) this.bottomLine --
+    if (this.bottomLine > this.th * 2 - 2) this.bottomLine --
 }
 
 function pageDown() {
@@ -256,15 +271,25 @@ function pageDown() {
 }
 
 function lastPage() {
-    this.bottomLine = this.th - 1
+    this.bottomLine = this.cell.length / this.tw - 1
+}
+
+function isLastPage() {
+    return (this.bottomLine >= (this.cell.length / this.tw) - 1)
+}
+
+function firstPage() {
+    this.bottomLine = this.th * 2 - 2
 }
 
 function backspace() {
+    this.touch()
     this.left()
     this.putc(this.cx, this.cy, SPACE)
 }
 
 function backshift() {
+    this.touch()
     this.backspace()
 
     let tx = this.cx
@@ -287,11 +312,13 @@ function backshift() {
 
 function htab(x) {
     if (!x) return
+    this.touch()
     this.cx = limit(x - 1, 0, this.tw - 1)
 }
 
 function vtab(y) {
     if (!y) return
+    this.touch()
     this.cy = limit(y - 1, 0, this.th - 1)
 }
 
@@ -323,15 +350,16 @@ function draw() {
         }
     }
 
-    if (this.timer % 1 < .5) {
-        if (this.cx >= 0 && this.cx < tw
-                && this.cy >= 0 && this.cy < th) {
-            fill(env.context.ink)
-            rect(this.cx*fw*scale,
-                    (this.cy*fh + this.curShift)*scale,
-                    fw*scale, this.curSize*scale)
-            //text(CUR, this.cx*fw*scale, this.cy*fh*scale)
-        }
+    // show cursor if needed
+    if (this.isLastPage()
+            && this.timer % 1 < .5
+            && this.cx >= 0 && this.cx < tw
+            && this.cy >= 0 && this.cy < th) {
+        fill(env.context.ink)
+        rect(this.cx*fw*scale,
+                (this.cy*fh + this.curShift)*scale,
+                fw*scale, this.curSize*scale)
+        //text(CUR, this.cx*fw*scale, this.cy*fh*scale)
     }
 
     restore()
