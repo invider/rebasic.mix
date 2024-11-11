@@ -47,6 +47,10 @@ const io = {
         this.command.paper()
     },
 
+    clt: function() {
+        lab.textmode.clear()
+    },
+
     htab: function(x) {
         lab.textmode.htab(x)
     },
@@ -78,6 +82,8 @@ io.print.man = 'print out\n'
 
 io.cls.man = 'clear the screen'
 io.home = io.cls
+
+io.clt.man = 'clear the text buffer'
 
 io.rom.man = 'list examples from rom'
 
