@@ -220,6 +220,13 @@ const screen = {
         context.y = y
     },
 
+    circle: function(x, y, r, ci) {
+        const c = mapColor(ci) || env.context.ink
+        const RGBA = color2RGBA(c) // TODO optimize to have in the color table
+
+        lib.gx.drawCircle(x, y, r, RGBA)
+    },
+
     box: function(x, y, w, h, ci) {
         let c = mapColor(ci) || env.context.ink
         ctx.fillStyle = c
@@ -283,4 +290,7 @@ screen.line.man = "draw a line"
 
 screen.drawto.usage = "[x], [y]"
 screen.drawto.man = "draw a line to coordinates"
+
+screen.circle.usage = "[x], [y], [r], <color>"
+screen.circle.man = "draw a circle"
 

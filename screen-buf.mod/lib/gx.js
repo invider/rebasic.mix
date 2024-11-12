@@ -10,3 +10,38 @@ function put(x, y, RGBA) {
     lab.pdata[i++] = RGBA[2]
     lab.pdata[i  ] = RGBA[3]
 }
+
+function drawCirclePoints(x, y, xc, yc, RGBA) {
+    put(xc + x, yc + y, RGBA)
+    put(xc + y, yc + x, RGBA)
+    put(xc + y, yc - x, RGBA)
+    put(xc + x, yc - y, RGBA)
+    put(xc - x, yc - y, RGBA)
+    put(xc - y, yc - x, RGBA)
+    put(xc - y, yc + x, RGBA)
+    put(xc - x, yc + y, RGBA)
+}
+
+function drawCircle(xc, yc, r, RGBA) {
+    let x = 0,
+        y = r,
+        d = 1 - r,
+        delta1 = 3,
+        delta2 = -2*r + 5
+    drawCirclePoints(x, y, xc, yc, RGBA)
+    while(y > x) {
+        if (d < 0) {
+            d += delta1
+            delta1 += 2
+            delta2 += 2
+            x++
+        } else {
+            d += delta2
+            delta1 += 2
+            delta2 += 4
+            x++
+            y--
+        }
+        drawCirclePoints(x, y, xc, yc, RGBA)
+    }
+}
