@@ -69,6 +69,47 @@ function mapColor(ci) {
     return c
 }
 
+function drawLine(x1, y1, x2, y2, ci) {
+    const c = mapColor(ci) || env.context.ink
+    const RGBA = color2RGBA(c) // TODO optimize to have in the color table
+
+    const dx = abs(x2 - x1),
+          dy = abs(y2 - y1),
+          sx = x2 >= x1? 1 : -1,
+          sy = y2 >= y1? 1 : -1
+
+    if (dy <= dx) {
+        let d = (dy << 1) - dx
+        let d1 = dy << 1
+        let d2 = (dy - dx) << 1
+        lib.gx.put(x1, y1, RGBA)
+
+        for (let x = x1 + sx, y = y1, i = 1; i <= dx; i++, x += sx) {
+            if (d > 0) {
+                d += d2
+                y += sy
+            } else {
+                d += d1
+            }
+            lib.gx.put(x, y, RGBA)
+        }
+    } else {
+        let d = (dx << 1) - dy
+        let d1 = dx << 1
+        let d2 = (dx - dy) << 1
+        lib.gx.put(x1, y1, RGBA)
+        for (let x = x1, y = y1 + sy, i = 1; i <= dy; i++, y += sy) {
+            if (d > 0) {
+                d += d2
+                x += sx
+            } else {
+                d += d1
+            }
+            lib.gx.put(x, y, RGBA)
+        }
+    }
+}
+
 const screen = {
 
     //
@@ -104,6 +145,7 @@ const screen = {
             env.context.paper = c
         }
         lab.framebuffer = ctx.getImageData(0, 0, ctx.width, ctx.height)
+        lab.pdata = lab.framebuffer.data
     },
 
     border: function(ci) {
@@ -113,20 +155,67 @@ const screen = {
     },
 
     plot: function(x, y, ci) {
+        if (x < 0 || x >= env.width || y < 0 || y >= env.height) return
         const c = mapColor(ci) || env.context.ink
         if (!c) return
-        ctx.fillStyle = c
-        env.context.ink = c
-        ctx.fillRect(x, y, 1, 1)
+        const RGBA = color2RGBA(c) // TODO optimize to have in the color table
+
+        let i = (y * env.width + x) * 4
+        lab.pdata[i++] = RGBA[0]
+        lab.pdata[i++] = RGBA[1]
+        lab.pdata[i++] = RGBA[2]
+        lab.pdata[i  ] = RGBA[3]
+
         // cache coordinates in the graphical context
         context.x = x
         context.y = y
     },
 
+    line: function(x1, y1, x2, y2, ci) {
+        const c = mapColor(ci) || env.context.ink
+        const RGBA = color2RGBA(c) // TODO optimize to have in the color table
+
+        const dx = abs(x2 - x1),
+              dy = abs(y2 - y1),
+              sx = x2 >= x1? 1 : -1,
+              sy = y2 >= y1? 1 : -1
+
+        if (dy <= dx) {
+            let d = (dy << 1) - dx
+            let d1 = dy << 1
+            let d2 = (dy - dx) << 1
+            lib.gx.put(x1, y1, RGBA)
+
+            for (let x = x1 + sx, y = y1, i = 1; i <= dx; i++, x += sx) {
+                if (d > 0) {
+                    d += d2
+                    y += sy
+                } else {
+                    d += d1
+                }
+                lib.gx.put(x, y, RGBA)
+            }
+        } else {
+            let d = (dx << 1) - dy
+            let d1 = dx << 1
+            let d2 = (dx - dy) << 1
+            lib.gx.put(x1, y1, RGBA)
+            for (let x = x1, y = y1 + sy, i = 1; i <= dy; i++, y += sy) {
+                if (d > 0) {
+                    d += d2
+                    x += sx
+                } else {
+                    d += d1
+                }
+                lib.gx.put(x, y, RGBA)
+            }
+        }
+    },
+
+    line: drawLine,
+
     drawto: function(x, y) {
-        ctx.strokeStyle = env.context.ink
-        lineWidth(1)
-        line(context.x + .5, context.y + .5, x + .5, y + .5)
+        drawLine(context.x, context.y, x, y)
         context.x = x
         context.y = y
     },
@@ -188,6 +277,9 @@ screen.plot.man = "draw a pixel"
 
 screen.pset.usage = "[x], [y], <color>"
 screen.pset.man = "draw a pixel"
+
+screen.line.usage = "[x1], [y1], [x2], [y2], <color>"
+screen.line.man = "draw a line"
 
 screen.drawto.usage = "[x], [y]"
 screen.drawto.man = "draw a line to coordinates"

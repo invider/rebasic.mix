@@ -24,9 +24,10 @@ function draw() {
     const x = (env.width - sw)/2
     const y = (env.height - sh)/2
 
+    mod['screen-buf'].lib.gx.sync() // sync pixel data with the framebuffer
     blocky()
     //smooth()
-    image(vram, x, y, sw, sh)
+    image(vram, x, y, sw, sh)       // render the framebuffer
 
     this.x = x
     this.y = y

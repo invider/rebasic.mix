@@ -1,3 +1,4 @@
+/*
 function generateNoise(w, h) {
     if (!this.mask) this.mask = []
 
@@ -19,6 +20,7 @@ function drawNoise() {
         }
     }
 }
+*/
 
 function paint() {
     /*
@@ -50,6 +52,7 @@ function paint() {
     */
 }
 
+/*
 let dirty = true
 function draw() {
     if (dirty) {
@@ -57,3 +60,4 @@ function draw() {
         dirty = true
     }
 }
+*/

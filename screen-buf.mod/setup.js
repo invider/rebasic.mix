@@ -12,6 +12,4 @@ function setup() {
     canvas.style.height = '' + H + 'px'
     env.width = W
     env.height = H
-
-    //lab.mem.generateNoise(W, H)
 }
