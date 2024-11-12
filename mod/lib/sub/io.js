@@ -91,4 +91,3 @@ io.htab.man = 'set horizontal cursor position'
 io.vtab.man = 'set vertical cursor position'
 
 io.close.service = true // hide from help
-

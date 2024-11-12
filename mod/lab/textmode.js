@@ -12,6 +12,8 @@ function init() {
     this.cy = 0
     this.bottomLine = 0
     this.cell = []
+    this.cellFace = []
+    this.cellBack = []
     this.adjust()
     this.clear()
 }
@@ -160,8 +162,10 @@ function putc(x, y, c) {
     if (x < 0 || x >= tw || y < 0 || y >= th) return // out of screen
     //this.cell[y * this.tw + x] = c
     this.touch()
-    const fy = this.bottomLine - (th - 1 - y)
-    this.cell[fy * tw + x] = c.toUpperCase()
+    const at = (this.bottomLine - (th - 1 - y)) * tw + x
+    this.cell[at] = c.toUpperCase()
+    this.cellFace[at] = env.context.ink
+    this.cellBack[at] = env.context.back
 }
 
 function swap(x, y, c) {
@@ -343,10 +347,17 @@ function draw() {
 
     for (let y = 0, l1 = th; y < l1; y++) {
         for (let x = 0, l2 = tw; x < l2; x++) {
-            fill(env.context.ink)
-            const fy = this.bottomLine - (th - 1 - y)
-            const c = cell[fy*tw + x] || '?'
-            text(c, x*fw*scale, y*fh*scale)
+            const at = (this.bottomLine - (th - 1 - y)) * tw + x,
+                  ch = cell[at] || '?',
+                  face = this.cellFace[at] || env.context.ink,
+                  back = this.cellBack[at] || null
+            if (back) {
+                fill(back)
+                rect(x*fw*scale - .5, y*fh*scale - .5,
+                        fw*scale + 1, fh*scale + 1)
+            }
+            fill(face)
+            text(ch, x*fw*scale, y*fh*scale)
         }
     }
 
