@@ -4,6 +4,7 @@ const palette = [
 ]
 
 const colors = {
+    'clear':    null,           // transparent
     'yellow':   '#b58900',      // solar - yellow
     'orange':   '#cb4b16',      // solar - orange
     'purple':   '#5d275d',
@@ -78,6 +79,12 @@ const screen = {
         const c = mapColor(ci)
         if (!c) return
         env.context.ink = c
+    },
+
+    backdrop: function(ci) {
+        const c = mapColor(ci)
+        if (!c) env.context.back = null
+        env.context.back = c
     },
 
     paper: function(ci) {
@@ -157,6 +164,9 @@ screen.border.man = 'set border color'
 
 screen.ink.usage = '[color]'
 screen.ink.man = 'set ink color'
+
+screen.backdrop.usage = '[color]'
+screen.backdrop.man = 'set character backdrop color, 0 if transparent'
 
 screen.face.usage = '[color]'
 screen.face.man = 'set ink color'

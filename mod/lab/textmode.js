@@ -66,6 +66,10 @@ function adjust() {
     this.curShift = 2
     this.fw = 5
     this.fh = 10
+    this.fdx = -.5
+    this.fdy = 1
+    this.fsx = .5
+    this.fsy = .5
 
     this.tw = floor(W / this.fw) - 1
     this.th = floor(H / this.fh)
@@ -343,7 +347,11 @@ function draw() {
     const tw = this.tw,
           th = this.th,
           fw = this.fw,
-          fh = this.fh
+          fh = this.fh,
+          fdx = this.fdx,
+          fdy = this.fdy,
+          fsx = this.fsx,
+          fsy = this.fsy
 
     for (let y = 0, l1 = th; y < l1; y++) {
         for (let x = 0, l2 = tw; x < l2; x++) {
@@ -353,8 +361,8 @@ function draw() {
                   back = this.cellBack[at] || null
             if (back) {
                 fill(back)
-                rect(x*fw*scale - .5, y*fh*scale - .5,
-                        fw*scale + 1, fh*scale + 1)
+                rect((x*fw + fdx) * scale, (y*fh + fdy) * scale,
+                       (fw + fsx) * scale,   (fh + fsy) * scale)
             }
             fill(face)
             text(ch, x*fw*scale, y*fh*scale)
