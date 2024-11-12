@@ -13,5 +13,5 @@ function setup() {
     env.width = W
     env.height = H
 
-    lab.mem.generateNoise(W, H)
+    //lab.mem.generateNoise(W, H)
 }

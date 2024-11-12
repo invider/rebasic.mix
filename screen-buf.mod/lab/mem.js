@@ -20,13 +20,6 @@ function drawNoise() {
     }
 }
 
-function clean() {
-    const w = env.width
-    const h = env.height
-    fill(env.context.paper)
-    rect(0, 0, w, h)
-}
-
 function paint() {
     /*
     const w = env.width

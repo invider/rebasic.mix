@@ -47,8 +47,8 @@ function setup() {
     buf.env.link(env.tune)
     buf.env.link(env.context)
 
-    mod['screen-buf'].lab.mem.clean()
     repl()
+    buf.lib.screen.paper()
 
     if (window.location.hash) {
         trap('hash', window.location.hash)

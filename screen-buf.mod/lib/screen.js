@@ -91,6 +91,7 @@ const screen = {
         env.context.fx = ifx
     },
 
+    // clear the framebuffer and set the background(paper) color
     paper: function(ci) {
         if (!ci) {
             ctx.fillStyle = env.context.paper
@@ -102,6 +103,7 @@ const screen = {
             ctx.fillRect(0, 0, rx(1), ry(1))
             env.context.paper = c
         }
+        lab.framebuffer = ctx.getImageData(0, 0, ctx.width, ctx.height)
     },
 
     border: function(ci) {
@@ -130,8 +132,7 @@ const screen = {
     },
 
     box: function(x, y, w, h, ci) {
-        let c = mapColor(ci)
-        if (!c) return
+        let c = mapColor(ci) || env.context.ink
         ctx.fillStyle = c
         ctx.fillRect(x, y, w, h)
     },
