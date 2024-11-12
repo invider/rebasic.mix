@@ -87,6 +87,10 @@ const screen = {
         env.context.back = c
     },
 
+    fx: function(ifx) {
+        env.context.fx = ifx
+    },
+
     paper: function(ci) {
         if (!ci) {
             ctx.fillStyle = env.context.paper
@@ -167,6 +171,10 @@ screen.ink.man = 'set ink color'
 
 screen.backdrop.usage = '[color]'
 screen.backdrop.man = 'set character backdrop color, 0 if transparent'
+
+screen.fx.usage = '[type]'
+screen.fx.man = 'set character effect\n    available types:'
+                + '\n    0: none\n    1: inverse blink\n    2: blink'
 
 screen.face.usage = '[color]'
 screen.face.man = 'set ink color'

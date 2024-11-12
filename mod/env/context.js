@@ -7,4 +7,5 @@ const context = {
     paper: hsl(.16, .4, .7), // the main screen background color
     ink: '#252527',          // current color for text and drawing
     back: null,              // each individual character background in the text buffer
+    fx:   0,
 }
