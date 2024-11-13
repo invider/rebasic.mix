@@ -59,6 +59,10 @@ const io = {
         lab.textmode.vtab(y)
     },
 
+    locate: function(x, y, c) {
+        lab.textmode.locate(x, y, c)
+    },
+
     rom: function() {
         const vm = this
         vm.command.print('=== ROM EXAMPLES ===')
@@ -89,5 +93,8 @@ io.rom.man = 'list examples from rom'
 
 io.htab.man = 'set horizontal cursor position'
 io.vtab.man = 'set vertical cursor position'
+
+io.locate.usage = '[x], [y], <cursor-mode>'
+io.locate.man = 'set the cursor position and mode'
 
 io.close.service = true // hide from help

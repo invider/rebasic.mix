@@ -10,6 +10,7 @@ function init() {
     this.timer = 0
     this.cx = 0
     this.cy = 0
+    this.cmode = 1
     this.bottomLine = 0
     this.cell = []
     this.cellFace = []
@@ -335,6 +336,16 @@ function vtab(y) {
     this.cy = limit(y - 1, 0, this.th - 1)
 }
 
+function locate(x, y, c) {
+    if (!x || !y) return
+    this.touch()
+    this.cx = limit(x - 1, 0, this.tw - 1)
+    this.cy = limit(y - 1, 0, this.th - 1)
+    if (c !== undefined) {
+        this.cmode = c? 1 : 0
+    }
+}
+
 function evo(dt) {
     this.timer += dt
 }
@@ -393,10 +404,9 @@ function draw() {
     }
 
     // show cursor if needed
-    if (this.isLastPage()
+    if (this.cmode === 1
             && this.timer % 1 < .5
-            && this.cx >= 0 && this.cx < tw
-            && this.cy >= 0 && this.cy < th) {
+            && this.isLastPage()) {
         fill(env.context.ink)
         rect(this.cx*fw*scale,
                 (this.cy*fh + this.curShift)*scale,

@@ -229,8 +229,9 @@ const screen = {
 
     box: function(x, y, w, h, ci) {
         let c = mapColor(ci) || env.context.ink
-        ctx.fillStyle = c
-        ctx.fillRect(x, y, w, h)
+        const RGBA = color2RGBA(c) // TODO optimize to have in the color table
+
+        lib.gx.drawBox(x, y, w, h, RGBA)
     },
 
     color: function(faceColor, backgroundColor, borderColor) {

@@ -11,6 +11,14 @@ function put(x, y, RGBA) {
     lab.pdata[i  ] = RGBA[3]
 }
 
+function drawBox(x, y, w, h, RGBA) {
+    for (let iy = 0; iy < h; iy++) {
+        for (let ix = 0; ix < w; ix++) {
+            put(x + ix, y + iy, RGBA)
+        }
+    }
+}
+
 function drawCirclePoints(x, y, xc, yc, RGBA) {
     put(xc + x, yc + y, RGBA)
     put(xc + y, yc + x, RGBA)
