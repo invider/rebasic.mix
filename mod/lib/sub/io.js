@@ -55,6 +55,10 @@ const io = {
         this.command.paper()
     },
 
+    screenshot: function(name) {
+        lib.util.takeScreenshot(name)
+    },
+
     htab: function(x) {
         lab.textmode.htab(x)
     },
@@ -94,6 +98,9 @@ io.home = io.cls
 io.clt.man = 'clear the text buffer'
 
 io.clg.man = 'clear the framebuffer (graphics)'
+
+io.screenshot.usage = '<filename>'
+io.screenshot.manual = 'take a screenshot'
 
 io.rom.man = 'list examples from rom'
 

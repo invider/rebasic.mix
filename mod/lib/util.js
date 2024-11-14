@@ -23,3 +23,8 @@ function loadSourceFile(file) {
 	reader.readAsText(input.files[0]);
 }
 
+let shots = 0
+function takeScreenshot(name) {
+    name = name || 'rebasic' + (++shots)
+    lib.img.screenshot(name)
+}
