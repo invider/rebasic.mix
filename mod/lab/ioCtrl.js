@@ -3,6 +3,7 @@ function init() {
     this.buf = []
     this.history = []
     this.historyPos = 0
+    this.editorPos = 0
 }
 
 function sync(cmd) {
@@ -89,6 +90,84 @@ function next() {
     if (this.historyPos < this.history.length) {
         this.historyPos ++
         let cmd = this.history[this.historyPos]
+        if (!cmd && this.unexecuted) {
+            cmd = this.unexecuted
+        }
+        this.sync(cmd)
+    }
+}
+
+function onNewLine(n) {
+    this.editorPos = n
+}
+
+function firstLine() {
+    lab.textmode.touch()
+    this.editorPos = 0
+    let cmd = lab.vm.lines[this.editorPos]
+    while(this.editorPos < lab.vm.lines.length && !cmd) {
+        this.editorPos ++
+        cmd = lab.vm.lines[this.editorPos]
+    }
+    if (!cmd && this.unexecuted) {
+        cmd = this.unexecuted
+    }
+    this.sync(cmd)
+}
+
+function lastLine() {
+    lab.textmode.touch()
+    this.editorPos = lab.vm.lines.length - 1
+    if (this.editorPos === lab.vm.lines.length) {
+        this.unexecuted = this.buf.join('')
+    }
+
+    let cmd = lab.vm.lines[this.editorPos]
+    while (this.editorPos > 0 && !cmd) {
+        this.editorPos --
+        cmd = lab.vm.lines[this.editorPos]
+    }
+    this.sync(cmd)
+}
+
+function prevLine() {
+    lab.textmode.touch()
+
+    let currentCmd = lab.vm.lines[this.editorPos]
+    if (currentCmd && currentCmd !== this.buf.join('')) {
+        this.sync(currentCmd)
+        return
+    }
+
+    if (this.editorPos > 0) {
+        if (this.editorPos === lab.vm.lines.length) {
+            this.unexecuted = this.buf.join('')
+        }
+
+        let cmd
+        while (this.editorPos > 0 && !cmd) {
+            this.editorPos --
+            cmd = lab.vm.lines[this.editorPos]
+        }
+        this.sync(cmd)
+    }
+}
+
+function nextLine() {
+    lab.textmode.touch()
+
+    let currentCmd = lab.vm.lines[this.editorPos]
+    if (currentCmd && currentCmd !== this.buf.join('')) {
+        this.sync(currentCmd)
+        return
+    }
+
+    if (this.editorPos < lab.vm.lines.length) {
+        let cmd
+        while(this.editorPos < lab.vm.lines.length && !cmd) {
+            this.editorPos ++
+            cmd = lab.vm.lines[this.editorPos]
+        }
         if (!cmd && this.unexecuted) {
             cmd = this.unexecuted
         }

@@ -1,28 +1,34 @@
+> clg
+> save the style before run and restore it (on stop/end?)
+> rect
+> function declaration with defun
+> edit # line?
+> INKEY$
+> ability to load and then return to previous program
 > redefine the color palette
-> set autonumbering value
 > shift numbers
+> on - gosub statement
 > on - goto statement
-> on - gosum statement
-> defun for function declaration
-> subroutines
+> if - goto - else statement
 > proper line mapping on load
-> ! commands to clear the screen - like run! and list!
 > color name mapping
 > tmode screenshot?
 > gmode screenshot?
-> rect
-> border
-> edit # line
 > cont after stop
 
 > sprite engine 
+> sprite hex data
 > paired tile loading support (test.bas + test.png), maybe #include comments
 > paired sound sprite loading
-> sprite hex data
 > game loop engine (setup, level, handle, evo, draw, traps, actors)
-> screen buffer support
+> double buffering support
 > native js functions
 
+V browse/edit lines with ctrl + up/down just like the history
+V autonumber lines
+V ! commands to preliminary clear the screen - like run! and list!
+V # and ` comments
+V subroutines - gosub and return
 V text effects
 V fix scroll up edge
 V hide the cursor on page up

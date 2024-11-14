@@ -6,6 +6,19 @@ function keyDown(e) {
                 lab.vm.stop()
                 break
 
+            case 'ArrowUp':
+                lab.ioCtrl.prevLine()
+                break
+            case 'ArrowDown':
+                lab.ioCtrl.nextLine()
+                break
+            case 'ArrowLeft':
+                lab.ioCtrl.firstLine()
+                break
+            case 'ArrowRight':
+                lab.ioCtrl.lastLine()
+                break
+
             case 'Home':
                 lab.ioCtrl.firstPage()
                 break

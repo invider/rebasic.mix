@@ -32,6 +32,10 @@ function setupVM() {
     // specific hooks to handle stdin/out
     vm.command.open() // open IO with io-specific procedure
 
+    vm.onNewLine = function(n) {
+        lab.ioCtrl.onNewLine(n)
+    }
+
     return vm
 }
 
