@@ -1,20 +1,20 @@
-> clg
 > save the style before run and restore it (on stop/end?)
-> rect
-> function declaration with defun
-> edit # line?
-> INKEY$
 > ability to load and then return to previous program
+  (could make a test suit with that)
+> rect
+> color name mapping
+> function/procedure declaration with defun
+> edit # line? #editor
+> shift numbers #editor
+> wait for a keypress to continue output mode
+> randomize (with optional seed)
+> INKEY$
 > redefine the color palette
-> shift numbers
 > on - gosub statement
 > on - goto statement
 > if - goto - else statement
-> proper line mapping on load
-> color name mapping
-> tmode screenshot?
-> gmode screenshot?
 > cont after stop
+> proper line mapping on load? (seems to be done?)
 
 > sprite engine 
 > sprite hex data
@@ -24,6 +24,8 @@
 > double buffering support
 > native js functions
 
+V clg
+V screenshot
 V browse/edit lines with ctrl + up/down just like the history
 V autonumber lines
 V ! commands to preliminary clear the screen - like run! and list!
