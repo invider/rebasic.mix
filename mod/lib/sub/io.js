@@ -39,6 +39,7 @@ const io = {
                 //process.stdout.write('' + v + ' ')
             }
         }
+        lab.ioCtrl.enable()
         this.waitForInput()
     },
 

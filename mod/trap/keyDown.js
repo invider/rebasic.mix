@@ -1,4 +1,8 @@
 function keyDown(e) {
+    if (!e.repeat) {
+        env.currentKey = e.key.toLowerCase()
+    }
+
     if (e.ctrlKey) {
         switch(e.code) {
             case 'KeyC':
@@ -32,7 +36,7 @@ function keyDown(e) {
     } else {
         switch (e.code) {
             case 'Escape':
-                lab.vm.stop()
+                lab.ioCtrl.stop()
                 break
 
             case 'Enter':

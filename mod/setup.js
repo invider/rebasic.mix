@@ -18,6 +18,9 @@ function setupVM() {
     const sys = lib.sub.sys
     for (let n in sys) vm.defineCmd(n, sys[n])
 
+    const ifunc = lib.sub.func
+    for (let n in ifunc) vm.defineFun(n, ifunc[n])
+
     const math = mod.rebasic.lib.math
     for (let n in math.fn) vm.defineFun(n, math.fn[n])
     for (let n in math.scope) vm.defineConst(n, math.scope[n])
@@ -29,12 +32,29 @@ function setupVM() {
     const screen = mod['screen-buf'].lib.screen
     for (let n in screen) vm.defineCmd(n, screen[n])
 
-    // specific hooks to handle stdin/out
-    vm.command.open() // open IO with io-specific procedure
-
+    // === define event handlers ===
     vm.onNewLine = function(n) {
         lab.ioCtrl.onNewLine(n)
     }
+
+    vm.onRun = function() {
+        env.currentKey = ''
+        lab.ioCtrl.disable()
+        // TODO store the text mode settings
+    }
+
+    vm.onInput = function(captured) {
+        if (captured) lab.ioCtrl.disable()
+    }
+
+    vm.onStop = function() {
+        if (lab.vm.loop) lab.ioCtrl.enable()
+        // TODO restore the text mode settings
+    }
+
+    // specific hooks to handle stdin/out
+    vm.command.open() // open IO with io-specific procedure
+
 
     return vm
 }

@@ -1,8 +1,8 @@
 module.exports = {
 
     load: function load(name) {
-        name = name.toLowerCase()
         if (name) {
+            name = name.toLowerCase()
             // look up in ROM
             const src = lib.rom[name]
             if (src) {

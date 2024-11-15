@@ -4,6 +4,15 @@ function init() {
     this.history = []
     this.historyPos = 0
     this.editorPos = 0
+    this.disabled = false
+}
+
+function enable() {
+    this.disabled = false
+}
+
+function disable() {
+    this.disabled = true
 }
 
 function sync(cmd) {
@@ -15,6 +24,7 @@ function sync(cmd) {
 }
 
 function inputKey(c) {
+    if (this.disabled) return
     // escape non-ascii and control characters
     const code = c.charCodeAt(0)
     if (code < 32 || code > 126) return
@@ -36,6 +46,7 @@ function inputKey(c) {
 }
 
 function backspace() {
+    if (this.disabled) return
     if (this.buf.length > 0) {
         if (this.cur < 0) {
             const pos = this.buf.length - abs(this.cur)
@@ -62,11 +73,12 @@ function saveHistory(cmd) {
 
 function command(cmd) {
     lab.textmode.touch()
-    this.saveHistory(cmd)
+    this.saveHistory(cmd) // TODO we don't need that history in input mode?
     lab.vm.inputHandler(cmd)
 }
 
 function enter() {
+    if (this.disabled) return
     lab.textmode.returnCursor()
     this.command(this.buf.join(''))
     this.cur = 0
@@ -74,6 +86,7 @@ function enter() {
 }
 
 function prev() {
+    if (this.disabled) return
     lab.textmode.touch()
     if (this.historyPos > 0) {
         if (this.historyPos === this.history.length) {
@@ -86,6 +99,7 @@ function prev() {
 }
 
 function next() {
+    if (this.disabled) return
     lab.textmode.touch()
     if (this.historyPos < this.history.length) {
         this.historyPos ++
@@ -102,6 +116,7 @@ function onNewLine(n) {
 }
 
 function firstLine() {
+    if (this.disabled) return
     lab.textmode.touch()
     this.editorPos = 0
     let cmd = lab.vm.lines[this.editorPos]
@@ -116,6 +131,7 @@ function firstLine() {
 }
 
 function lastLine() {
+    if (this.disabled) return
     lab.textmode.touch()
     this.editorPos = lab.vm.lines.length - 1
     if (this.editorPos === lab.vm.lines.length) {
@@ -131,6 +147,7 @@ function lastLine() {
 }
 
 function prevLine() {
+    if (this.disabled) return
     lab.textmode.touch()
 
     let currentCmd = lab.vm.lines[this.editorPos]
@@ -154,6 +171,7 @@ function prevLine() {
 }
 
 function nextLine() {
+    if (this.disabled) return
     lab.textmode.touch()
 
     let currentCmd = lab.vm.lines[this.editorPos]
@@ -176,12 +194,14 @@ function nextLine() {
 }
 
 function home() {
+    if (this.disabled) return
     lab.textmode.touch()
     const shift = this.buf.length - abs(this.cur)
     for (let i = 0; i < shift; i++) this.left()
 }
 
 function right() {
+    if (this.disabled) return
     lab.textmode.touch()
     if (this.cur < 0) {
         this.cur ++
@@ -190,6 +210,7 @@ function right() {
 }
 
 function left() {
+    if (this.disabled) return
     lab.textmode.touch()
     const pos = abs(this.cur)
     if (pos < this.buf.length) {
@@ -199,11 +220,13 @@ function left() {
 }
 
 function end() {
+    if (this.disabled) return
     lab.textmode.touch()
     while(this.cur < 0) this.right()
 }
 
 function del() {
+    if (this.disabled) return
     lab.textmode.touch()
     if (this.buf.length > 0 && this.cur < 0) {
         const pos = this.buf.length - abs(this.cur)
@@ -214,17 +237,26 @@ function del() {
 }
 
 function pageUp() {
+    if (this.disabled) return
     lab.textmode.pageUp()
 }
 
 function pageDown() {
+    if (this.disabled) return
     lab.textmode.pageDown()
 }
 
 function firstPage() {
+    if (this.disabled) return
     lab.textmode.firstPage()
 }
 
 function lastPage() {
+    if (this.disabled) return
     lab.textmode.lastPage()
+}
+
+function stop() {
+    lab.vm.stop()
+    this.enable()
 }
