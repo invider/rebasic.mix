@@ -6,3 +6,4 @@
 60 print "AIR RAID ALERT !!!"
 70 locate 10, 12, 0
 80 print "proceed to the nearest shelter !!!"
+90 if inkey$() = '' then goto 90
