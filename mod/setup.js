@@ -40,6 +40,7 @@ function setupVM() {
     vm.onRun = function() {
         env.currentKey = ''
         lab.ioCtrl.disable()
+        lab.textmode.saveState()
         // TODO store the text mode settings
     }
 
@@ -49,12 +50,12 @@ function setupVM() {
 
     vm.onStop = function() {
         if (lab.vm.loop) lab.ioCtrl.enable()
+        lab.textmode.restoreState()
         // TODO restore the text mode settings
     }
 
     // specific hooks to handle stdin/out
     vm.command.open() // open IO with io-specific procedure
-
 
     return vm
 }

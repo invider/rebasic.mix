@@ -96,10 +96,20 @@ function clear() {
     this.lastPage()
     this.cx = 0
     this.cy = th - 1
+    this.lastFX = 0
 }
 
 function touch() {
     this.bottomLine = this.cell.length / this.tw - 1
+}
+
+function saveState() {
+    this.lastFX = env.context.fx
+}
+
+function restoreState() {
+    this.cmode = 1
+    env.context.fx = this.lastFX
 }
 
 function shiftScreen() {

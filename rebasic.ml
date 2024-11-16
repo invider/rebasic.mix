@@ -1,14 +1,15 @@
-> save the style before run and restore it (on stop/end?)
+> trigger onStop in case of an error
 > ability to load and then return to previous program
   (could make a test suit with that)
 > rect
-> color name mapping
+> color name mapping? (doesn't work everywhere?)
 > function/procedure declaration with defun
 > edit # line? #editor
 > shift numbers #editor
 > wait for a keypress to continue output mode
 > randomize (with optional seed)
-> INKEY$
+> rnd(N) to accept the number 0..N
+> rnd(-N) to set up the seed
 > redefine the color palette
 > on - gosub statement
 > on - goto statement
@@ -24,6 +25,8 @@
 > double buffering support
 > native js functions
 
+V save the style before run and restore it (on stop/end?)
+V INKEY$
 V clg
 V screenshot
 V browse/edit lines with ctrl + up/down just like the history
