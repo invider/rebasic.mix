@@ -7,14 +7,14 @@ function trimTail(buf) {
 
 function register(brief) {
     if (!brief) return
-    if (!lib.man) lib.touch('man')
+    if (!lib.brief) lib.touch('brief')
 
     trimTail(brief.buf)
     brief.body = brief.buf.join('\n')
-    lib.man.attach(brief)
+    lib.brief.attach(brief)
 }
 
-function man(src, name, path) {
+function brief(src, name, path) {
     const lines = src.split('\n')
 
     let state = 0, brief
