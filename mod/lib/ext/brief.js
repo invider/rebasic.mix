@@ -17,14 +17,14 @@ function register(brief) {
 function brief(src, name, path) {
     const lines = src.split('\n')
 
-    let state = 0, brief
+    let brief
     lines.forEach(line => {
         const tline = line.trim()
         if (tline.startsWith('#')) return // comment line
 
         if (tline.length > 0) {
-            // got the first definition
             if (tline.startsWith('>> ')) {
+                // got a command definition
                 const header = tline.substring(3).trim()
                 const parts = header.split('-')
                 if (parts.length === 2) {
@@ -36,10 +36,8 @@ function brief(src, name, path) {
                         title: title,
                         buf:   [],
                     }
-                    log('BRIEF: ' + name)
                 } else {
                     log.err('expect topic definition: [' + line + ']')
-                    console.dir(parts)
                 }
             } else {
                 if (brief) {
