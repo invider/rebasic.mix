@@ -70,8 +70,13 @@ module.exports = {
             })
             for (let i = 0; i < ls.length; i++) {
                 const name = ls[i]
-                const prefix = i > 0? ' * ' : ''
-                vm.command.print(prefix + name, { semi: true })
+                const prefix = i > 0? ' * ' : '* '
+                let line = prefix + name
+                if (lab.textmode.shiftsRemaining() <= line.length) {
+                    vm.command.print("")
+                    line = '* ' + name
+                }
+                vm.command.print(line, { semi: true })
             }
             vm.command.print('')
         }
