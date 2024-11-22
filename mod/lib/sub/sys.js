@@ -43,16 +43,27 @@ module.exports = {
 
         if (name) {
             const fn = vm.command[name] || vm.fun[name]
-            if (!fn) {
-                vm.command.print(name + ' - unknown command')
-            } else {
+            if (fn) {
                 let def = name
                 if (fn.usage) def += ' ' + fn.usage
                 if (fn.man) def += ' - ' + fn.man
                 vm.command.print(def)
+            } else {
+                const page = lib.page._dir[name]
+                if (page) {
+                    vm.command.print(page.body)
+                } else {
+                    vm.command.print(name + ' - unknown page/command')
+                }
             }
 
         } else {
+            vm.command.print('type "help <name>" for brief on any page/command.')
+            vm.command.print('type "help intro" to read the introduction.')
+            vm.command.print('')
+
+            vm.command.print('=== major commands and functions ===')
+
             const ls = []
             Object.keys(vm.command).forEach((cmd, i) => {
                 if (cmd.startsWith('_')) return

@@ -1,3 +1,6 @@
+> help!
+> help tags
+> help intro
 > trigger onStop in case of an error
 > ability to load and then return to previous program
   (could make a test suit with that)
